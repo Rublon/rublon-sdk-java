@@ -1,0 +1,1265 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta http-equiv="refresh" content="500">
+<title>Rublon Java SDK</title>
+
+
+<style type="text/css">
+/* GitHub stylesheet for MarkdownPad (http://markdownpad.com) */
+/* Author: Nicolas Hery - http://nicolashery.com */
+/* Version: b13fe65ca28d2e568c6ed5d7f06581183df8f2ff */
+/* Source: https://github.com/nicolahery/markdownpad-github */
+
+/* RESET
+=============================================================================*/
+
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+a:visited {border: none;}
+
+/* BODY
+=============================================================================*/
+
+body {
+  font-family: Helvetica, arial, freesans, clean, sans-serif;
+  font-size: 14px;
+  line-height: 1.6;
+  color: #333;
+  background-color: #fff;
+  padding: 20px;
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+body>*:first-child {
+  margin-top: 0 !important;
+}
+
+body>*:last-child {
+  margin-bottom: 0 !important;
+}
+
+/* BLOCKS
+=============================================================================*/
+
+p, blockquote, ul, ol, dl, table, pre {
+  margin: 15px 0;
+}
+
+/* HEADERS
+=============================================================================*/
+
+h1, h2, h3, h4, h5, h6 {
+  margin: 20px 0 10px;
+  padding: 0;
+  font-weight: bold;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1 tt, h1 code, h2 tt, h2 code, h3 tt, h3 code, h4 tt, h4 code, h5 tt, h5 code, h6 tt, h6 code {
+  font-size: inherit;
+}
+
+h1 {
+  font-size: 28px;
+  color: #000;
+}
+
+h2 {
+  font-size: 24px;
+  border-bottom: 1px solid #ccc;
+  color: #000;
+}
+
+h3 {
+  font-size: 20px;
+}
+
+h4 {
+  font-size: 16px;
+  font-family: Georgia, Serif;
+}
+
+h5 {
+  font-size: 14px;
+}
+
+h6 {
+  color: #777;
+  font-size: 14px;
+}
+
+body>h2:first-child, body>h1:first-child, body>h1:first-child+h2, body>h3:first-child, body>h4:first-child, body>h5:first-child, body>h6:first-child {
+  margin-top: 0;
+  padding-top: 0;
+}
+
+a:first-child h1, a:first-child h2, a:first-child h3, a:first-child h4, a:first-child h5, a:first-child h6 {
+  margin-top: 0;
+  padding-top: 0;
+}
+
+h1+p, h2+p, h3+p, h4+p, h5+p, h6+p {
+  margin-top: 10px;
+}
+
+/* LINKS
+=============================================================================*/
+
+a {
+  color: #4183C4;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* LISTS
+=============================================================================*/
+
+ul, ol {
+  padding-left: 30px;
+}
+
+ul li > :first-child, 
+ol li > :first-child, 
+ul li ul:first-of-type, 
+ol li ol:first-of-type, 
+ul li ol:first-of-type, 
+ol li ul:first-of-type {
+  margin-top: 0px;
+}
+
+ul ul, ul ol, ol ol, ol ul {
+  margin-bottom: 0;
+}
+
+dl {
+  padding: 0;
+}
+
+dl dt {
+  font-size: 14px;
+  font-weight: bold;
+  font-style: italic;
+  padding: 0;
+  margin: 15px 0 5px;
+}
+
+dl dt:first-child {
+  padding: 0;
+}
+
+dl dt>:first-child {
+  margin-top: 0px;
+}
+
+dl dt>:last-child {
+  margin-bottom: 0px;
+}
+
+dl dd {
+  margin: 0 0 15px;
+  padding: 0 15px;
+}
+
+dl dd>:first-child {
+  margin-top: 0px;
+}
+
+dl dd>:last-child {
+  margin-bottom: 0px;
+}
+
+/* CODE
+=============================================================================*/
+
+pre, code, tt {
+  font-size: 12px;
+  font-family: Consolas, "Liberation Mono", Courier, monospace;
+}
+
+code, tt {
+  margin: 0 0px;
+  padding: 0px 0px;
+  white-space: nowrap;
+  border: 1px solid #eaeaea;
+  background-color: #f8f8f8;
+  border-radius: 3px;
+}
+
+pre>code {
+  margin: 0;
+  padding: 0;
+  white-space: pre;
+  border: none;
+  background: transparent;
+}
+
+pre {
+  background-color: #f0f0f0;
+  border: 1px solid #ccc;
+  font-size: 13px;
+  line-height: 19px;
+  overflow: auto;
+  padding: 6px 10px;
+  border-radius: 3px;
+}
+
+pre code, pre tt {
+  background-color: transparent;
+  border: none;
+}
+
+kbd {
+    -moz-border-bottom-colors: none;
+    -moz-border-left-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-top-colors: none;
+    background-color: #DDDDDD;
+    background-image: linear-gradient(#F1F1F1, #DDDDDD);
+    background-repeat: repeat-x;
+    border-color: #DDDDDD #CCCCCC #CCCCCC #DDDDDD;
+    border-image: none;
+    border-radius: 2px 2px 2px 2px;
+    border-style: solid;
+    border-width: 1px;
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    line-height: 10px;
+    padding: 1px 4px;
+}
+
+/* QUOTES
+=============================================================================*/
+
+blockquote {
+  border-left: 4px solid #DDD;
+  padding: 0 15px;
+  color: #777;
+}
+
+blockquote>:first-child {
+  margin-top: 0px;
+}
+
+blockquote>:last-child {
+  margin-bottom: 0px;
+}
+
+/* HORIZONTAL RULES
+=============================================================================*/
+
+hr {
+  clear: both;
+  margin: 15px 0;
+  height: 0px;
+  overflow: hidden;
+  border: none;
+  background: transparent;
+  border-bottom: 4px solid #ddd;
+  padding: 0;
+}
+
+/* TABLES
+=============================================================================*/
+
+table {width: 100%;}
+
+caption {text-align: left; font-weight: bold;}
+
+table th {
+  font-weight: bold;
+}
+
+table th, table td {
+  border: 1px solid #ccc;
+  padding: 6px 13px;
+}
+
+table tr {
+  border-top: 1px solid #ccc;
+  background-color: #fff;
+}
+
+table tr:nth-child(2n) {
+  background-color: #f8f8f8;
+}
+
+table td:first-child {width: 20%;}
+table td:last-child {width: 60%;}
+
+
+/* IMAGES
+=============================================================================*/
+
+img {
+  max-width: 100%
+}
+
+.notice {background: #ffffcc; padding: 1em; border: 1px solid #ffe066;}
+
+</style>
+
+</head>
+<body>
+<h1>Rublon Java SDK</h1>
+
+<h2>Table of Contents</h2>
+
+<ol>
+<li><a href="#intro">Introduction</a>
+<ul>
+<li><a href="#intro-use-cases">Use cases</a></li>
+<li><a href="#intro-how-it-works">Principles of operation</a></li>
+<li><a href="#intro-first-steps">First steps</a></li>
+<li><a href="#intro-examples">Examples' assumptions</a></li>
+<li><a href="#intro-mods">Modifying the library</a></li>
+</ul></li>
+<li><a href="#initialize">Library initialization</a></li>
+<li><a href="#auth">Signing in</a>
+<ul>
+<li><a href="#auth-example">Example code</a></li>
+</ul></li>
+<li><a href="#callback">Authentication finalization</a>
+<ul>
+<li><a href="#callback-input">Input params</a></li>
+<li><a href="#callback-verification">Authentication verification</a></li>
+<li><a href="#callback-example">Example code</a></li>
+</ul></li>
+<li><a href="#confirm">Secure transaction confirmation</a>
+<ul>
+<li><a href="#confirm-init">Initiating transaction confirmation</a></li>
+<li><a href="#confirm-callback">Finalizing the transaction</a></li>
+</ul></li>
+<li><a href="#email2fa">Email2FA - simplified identity verification</a>
+<ul>
+<li><a href="#email2fa-how-it-works">Principles of operation</a></li>
+<li><a href="#email2fa-config">Example usage</a></li>
+</ul></li>
+<li><a href="#gui">GUI</a>
+<ul>
+<li><a href="#gui-example">Example code</a></li>
+<li><a href="#gui-device-widget">Trusted Devices Widget</a></li>
+</ul></li>
+<li><a href="#business">Business level features</a>
+<ul>
+<li><a href="#api-get-features">Getting list of active features</a></li>
+<li><a href="#confirm-feature">Confirmations</a></li>
+<li><a href="#force-mobile-app">Force mobile app</a></li>
+<li><a href="#ignore-trusted-device">Ignore Trusted Device</a></li>
+<li><a href="#buffered-confirmation">Buffered confirmation</a></li>
+<li><a href="#sharing-access">Sharing access</a></li>
+<li><a href="#remote-logout">Remote logout</a></li>
+</ul></li>
+</ol>
+
+<p><a id="intro"></a></p>
+
+<h2>Introduction</h2>
+
+<p>The <em>Rublon Java SDK</em> library is a client-side implementation of
+the <a href="https://rublon.com">Rublon</a> authentication service written in Java,
+including methods for connecting with the Rublon API and embedding
+the service's GUI in a HTML-based environment.
+It forms a convenient Java coding language facade for the service's REST interface.</p>
+
+<p><a id="intro-use-cases"></a></p>
+
+<h3>Use cases</h3>
+
+<p>Rublon provides an additional secury layer:</p>
+
+<ol>
+<li><strong>during logging in to your system</strong>, adding a second (or additional)
+authentication factor,</li>
+<li><strong>while conducting a security-sensitive transactions</strong>,
+providing a user the means for identity confirmation before changing passwords
+or conducting a money transfer.</li>
+</ol>
+
+<p>To be able to perform an additional authentication using Rublon,
+the user must first be authenticated in a different way,
+e.g. with a username and password.
+It is a necessary step, because upon Rublon's initialization the service
+must receive certain information about the user:</p>
+
+<ul>
+<li>a unique Id, stored in the system (inafter called <strong>the integrated system</strong>) implementing the Rublon service,</li>
+<li>the user's email address.</li>
+</ul>
+
+<p>To experience the full measure of two-factor authentication, the end-user
+should install the Rublon mobile app, available on all leading smartphone
+systems. However, having those with older phone devices in mind or those
+who do not want to install any additional apps on their phones, we prepared
+a Email2FA process which does not require using an additional device of any kind.</p>
+
+<p><a id="intro-how-it-works"></a></p>
+
+<h3>Principles of operation</h3>
+
+<h4>User protection</h4>
+
+<p>User protection is active when a user's email address in the integrated system
+can be matched to a user in the Rublon service.
+For this purpose, the user's email is sent to Rublon servers.</p>
+
+<ol>
+<li>If the email is matched to an existing Rublon account, the user's identity
+can be confirmed using Rublon.</li>
+<li>Otherwise, if the user does not possess a Rublon account (the email
+could not be matched), Rublon will use the Email2FA process, trying to verify
+the user's identity by sending a confirmation email message to his email address.</li>
+</ol>
+
+<h4>Identity confirmation</h4>
+
+<p>If the library finds an active user protection, a URL address pointing to Rublon
+servers will be generated. The user's web browser must be then redirected
+to that URL in order to carry out the identity confirmation.</p>
+
+<p>If the web browser is the user's Trusted Device, the authentication will be
+performed automatically and invisibly. Otherwise, the user will be asked
+to scan a QR code using the Rublon mobile app or to click the verification
+link sent to his email address, upon which the authentication will be performed.</p>
+
+<h4>Return to the integrated system</h4>
+
+<p>After a successful authentication, the web browser will be redirected to
+a callback URL address which points to the integrated system servers.
+The integrated system should intercept that URL, retrieve its params and finalize
+the authentication using this library.</p>
+
+<p><a id="intro-first-steps"></a></p>
+
+<h3>First steps</h3>
+
+<p>To start using the Rublon Java SDK library you should:</p>
+
+<ul>
+<li>install the Rublon mobile app on your smartphone,
+create a new account and confirm your email address,</li>
+<li>visit the Rublon <a href="https://developers.rublon.com">Developer Area</a>
+at <a href="https://developers.rublon.com">developers.rublon.com</a>
+and log in by clicking the "Developer Dashboard" button,
+and scanning the QR code that will appear using the Rublon mobile app,</li>
+<li>go to the "Add website" form (Dashboard -&gt; Add website)
+and fill in the required fields,</li>
+<li>copy the provided <strong>system token</strong> and <strong>secret key</strong>,
+which will be used to identify the integrated system and verify
+the authenticity and integrity of the messages exchanged with Rublon API.</li>
+</ul>
+
+<p><a id="intro-examples"></a></p>
+
+<h3>Examples' assumptions</h3>
+
+<p>In the following examples we assume the existence of the session handler
+class <code>Session</code>, which has access to an object storing the currently logged
+in user data and the <code>HttpServer</code> class which is a simple HTTP server instance.</p>
+
+<p><a id="intro-mods"></a></p>
+
+<h3>Modifying the library</h3>
+
+<p>The <code>Rublon2Factor</code> class implements a few public methods, which, when needed,
+can be overriden with inheritance.</p>
+
+<p>We strongly discourage you from modifying any part of the library, as it usually
+leads to difficulties during future library updates. If you need to change the flow
+or internal structure of the <code>Rublon2Factor</code>, <code>Rublon2FactorGUI</code> or <code>Rublon2FactorCallback</code>
+classes, don't hesitate to subclass them according to your needs.</p>
+
+<p><a id="initialize"></a></p>
+
+<h2>Library initialization</h2>
+
+<p>To initialize the library you need to instantiate a <code>Rublon2Factor</code> class object.
+Its constructor takes three arguments.</p>
+
+<table>
+    <caption><code>Rublon2Factor</code> class constructor arguments</caption>
+    <thead><tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Description</th>
+    </tr></thead>
+    <tbody>
+        <tr><td><code>systemToken</code></td><td>String</td><td>Your system's public Id</td></tr>
+        <tr><td><code>secretKey</code></td><td>String</td><td>Secret key</td></tr>
+        <tr><td><code>apiServer</code></td><td>String</td><td>(optional) API Server URI</td></tr>
+    </tbody>
+</table>
+
+<p>An example of the library's initialization:</p>
+
+<pre><code>    import com.rublon.sdk.twofactor.Rublon2Factor;
+
+    ...
+
+    Rublon2Factor rublon = new Rublon2Factor(
+        // system token:
+        "A69FC450848B4B94A040416DC4421523",
+        // secret key:
+        "bLS6NDP7pGjg346S4IHqTHgQQjjSLw3CyApvz5iRjYzgIPN4e9EOi1cQJLrTlvLoHY8zeqg4ILrItYidKJ6JjEUZaA6pR1tZMwSZ"
+    );
+</code></pre>
+
+<p><a id="auth"></a></p>
+
+<h2>Signing in</h2>
+
+<p>Rublon protects users during their signing in processes. Even if a someone
+lears the user's password with malicious intent, such a person would be unable
+to log in to the user's account, because a physical access to the Rublon mobile app
+(installed in the user's smartphone) or to his email account is needed.</p>
+
+<p class="notice">
+Developer can force users to authenticate using the mobile app (to avoid
+the Email2FA process) and/or ignore the Trusted Devices, which can
+increase the security. These features available only to systems
+integrated within the <em>Business plan</em>.
+<a href="https://developers.rublon.com/98/Pricing">Check the pricing</a>.
+</p>
+
+<p>Authenticating a user with the second factor should be initiated when the user
+has successfully passed the first factor of authentication (e.g. the valid user
+credentials have been provided) and the user's unique Id and email address are known.</p>
+
+<p>The <code>Rublon2Factor.auth()</code> method will check the user's protection status (using
+the email address) and return a URL address for the web browser to be redirected to
+(if user protection is active) or <code>null</code> in case the user's protection is not active.</p>
+
+<table>
+    <caption><code>Rublon2Factor.auth()</code> method arguments</caption>
+    <thead><tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Description</th>
+    </tr></thead>
+    <tbody>
+        <tr><td><code>callbackUrl</code></td><td>String</td><td>The integrated system's callback URL</td></tr>
+        <tr><td><code>userId</code></td><td>String</td><td>The integrated system's user's unique Id which will allow to log in the user upon successful authentication</td></tr>
+        <tr><td><code>userEmail</code></td><td>String</td><td>The user's email address in the integrated system which will allow to check the user's protection status and match the user to a Rublon account</td></tr>
+        <tr><td><code>consumerParams</code></td><td>JSONObject</td><td>Additional transaction parameters (optional)</td></tr>
+    </tbody>
+</table>
+
+<p><a id="auth-example"></a></p>
+
+<h3>Example code</h3>
+
+<p>An example of logging in a user on an integrated system:</p>
+
+<pre><code>/**
+ * An example method used to log the user in (integrated system's method)
+ */
+void login(String login, String password) {
+
+    if (loginPreListener()) {
+        User user = authenticate(login, password);
+        if (user != null) {
+
+            // The user has been authenticated.
+            Session.setUser(user);
+            loginPostListener();
+
+        }
+    }
+
+}
+
+
+/**
+ * Listener (hook) invoked after a successful first factor user authentication,
+ * implemented for Rublon integration purposes.
+ */
+void loginPostListener() {
+
+    Rublon2Factor rublon = new Rublon2Factor(
+        // systemToken (please store in a config):
+        "A69FC450848B4B94A040416DC4421523",
+        // secretKey (please store in a safe config):
+        "bLS6NDP7pGjg346S4IHqTHgQQjjSLw3CyApvz5iRjYzgIPN4e9EOi1cQJLrTlvLoHY8zeqg4ILrItYidKJ6JjEUZaA6pR1tZMwSZ"
+    );
+
+    try { // Initiate a Rublon authentication transaction
+
+        String url = rublon.auth(
+            "http://example.com/rublon_callback", // callback URL
+            Session.getUser().getId(), // User Id
+            Session.getUser().getEmail() // User email
+        );
+
+        if (url != null) { // User protection is active
+
+            // Log the user out before checking the second factor:
+            Session.setUser(null);
+
+            // Redirect the user's web browser to Rublon servers
+            // to verify the protection:
+            HttpServer.sendHeader("Location", url);
+
+        }
+
+    } catch (RublonException e) {
+        // An error occurred
+        Session.setUser(null);
+        HttpServer.setStatus(500);
+        HttpServer.setResponse("There was an error, please try again later.");
+    }
+
+    /* If we're here, the user's account is not protected by Rublon.
+    The user can be authenticated. */
+
+}
+</code></pre>
+
+<p>If the user's account is protected by Rublon, calling the <code>Rublon2Factor.auth()</code>
+method will return a URL address pointing to Rublon servers, which the user's
+browser should redirect to in order to verify a Trusted Device, display
+a QR code to be scanned by the Rublon mobile app or verify identity by clicking
+a confirmation link which has been sent to the user's email address.</p>
+
+<p class="notice">
+Because the user's web browser will be redirected to Rublon servers in order
+to confirm the user's identity, the user should be logged out
+(if he/she was logged in before) to prevent creating a user session.
+Otherwise Rublon will not protect the user effectively, because returning
+to the integrated system before a proper Rublon authentication is performed
+may grant the user access to an active logged in session in the system.
+The user should be logged in only after a successful Rublon authentication.
+</p>
+
+<p><a id="callback"></a></p>
+
+<h2>Authentication finalization</h2>
+
+<p>After a successful authentication Rublon will redirect the user's browser
+to the callback URL. The callback flow continues the authentication process,
+i.e. the finalization of the authentication (logging in or identity confirmation).</p>
+
+<p><a id="callback-input"></a></p>
+
+<h3>Input params</h3>
+
+<p>The callback URL will receive its input arguments in the URL address itself (<em>query string</em>).</p>
+
+<table>
+    <caption>Callback URL arguments</caption>
+    <thead><tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Description</th>
+    </tr></thead>
+    <tbody>
+        <tr><td><code>state</code></td><td>String</td><td>Authentication result: <code>ok</code>, <code>error</code> or <code>cancel</code></td></tr>
+        <tr><td><code>token</code></td><td>String</td><td>Access token (100 alphanumeric characters, upper- and lowercase), which allows authentication's verification using a background Rublon API connection</td></tr>
+    </tbody>
+</table>
+
+<div class="block">
+Notice: If the callback URL has been set to e.g. <code>http://example.com/twofactor/auth/</code>,
+the params will be appended to the URL address:
+<pre><code>http://example.com/twofactor/auth/?state=ok&token=Kmad4hAS...d</code></pre>
+If your callback URL should be formed differently (e.g. when using an URL rewrite),
+you can set the callback URL's template using the meta-tags:
+<code>%token%</code> and <code>%state%</code>, like so:<br />
+<pre><code>http://example.com/twofactor/auth/%state%/%token%</code></pre>
+</div>
+
+<p><a id="callback-verification"></a></p>
+
+<h3>Authentication verification</h3>
+
+<p>After the callback is invoked, for proper finalization of the authentication
+process you need to create a <code>Rublon2FactorCallback</code> subclass instance.
+Because the <code>Rublon2FactorCallback</code> class in abstract you need to create a subclass
+that implement needed methods which depend on your system details.</p>
+
+<table>
+    <caption><code>Rublon2FactorCallback</code> class constructor method arguments</caption>
+    <thead><tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Description</th>
+    </tr></thead>
+    <tbody>
+        <tr><td><code>rublon</code></td><td>Rublon2Factor</td><td>An instance of the <code>Rublon2Factor</code> class.</td></tr>
+    </tbody>
+</table>
+
+<p>Next, the <code>Rublon2FactorCallback.call()</code> method should be called.</p>
+
+<p>The following abstract methods should be implemented in a subclass.</p>
+
+<ul>
+<li><code>String getState()</code> - returns the "state" parameter from the HTTP GET request.</li>
+<li><code>String getAccessToken()</code> - returns the "token" parameter from the HTTP GET request.</li>
+<li><code>void handleCancel()</code> - called when the state parameter is not "ok" nor "error".</li>
+<li><code>void handleError()</code> - called when the state parameter value is "error".</li>
+<li><code>void userAuthenticated(String userId)</code> - handle the authenticated user with given user's local ID.</li>
+</ul>
+
+<p><a id="callback-example"></a></p>
+
+<h3>Example code</h3>
+
+<p>An example implementation of the <code>Rublon2FactorCallback</code> class and usage in the callback:</p>
+
+<pre><code>class Callback extends Rublon2FactorCallback {
+    public String getState() {
+        return HttpServer.getRequestHandler().getParam(PARAMETER_STATE);
+    }
+    public String getAccessToken() {
+        return HttpServer.getRequestHandler().getParam(PARAMETER_ACCESS_TOKEN);
+    }
+    protected void handleCancel() {
+        HttpServer.sendHeader("Location", "/login");
+    }
+    protected void handleError() {
+        HttpServer.sendHeader("Location", "/login?msg=rublon-error");
+    }
+    protected void userAuthenticated(String userId) {
+        Session.setUser(User.getById(userId));
+        HttpServer.sendHeader("Location", "/dashboard");
+    }
+}
+
+...
+
+Rublon2Factor rublon = new Rublon2Factor(
+    "A69FC450848B4B94A040416DC4421523",
+    "bLS6NDP7pGjg346S4IHqTHgQQjjSLw3CyApvz5iRjYzgIPN4e9EOi1cQJLrTlvLoHY8zeqg4ILrItYidKJ6JjEUZaA6pR1tZMwSZ"
+);
+
+try {
+
+    Rublon2FactorCallback callback = new Rublon2FactorCallback(rublon);
+    callback.call();
+
+} catch (CallbackException e) {
+    // Please handle this error in the better way:
+    HttpServer.setStatus(500);
+    HttpServer.setResponse("There was an error, please try again later. " + e.getMessage());
+}
+</code></pre>
+
+<p><a id="confirm"></a></p>
+
+<h2>Secure transaction confirmation</h2>
+
+<p class="notice">
+This feature is available only to systems integrated within the <em>Business plan</em>.
+<a href="https://developers.rublon.com/98/Pricing">Check the pricing</a>.
+</p>
+
+<p>If you are concerned about the security of some of your more sensitive transactions,
+e.g. financial transfers, changing your password or email address, Rublon provides
+the means for confirming such processes in a secure way. This feature is similar
+in operation to the Rublon-confirmed authentication, however instead of scanning
+a QR code the user is required to answer a question displayed in the Rublon mobile
+app via a push notification.</p>
+
+<p>After initiating a Rublon-confirmed transaction, a message will be displayed in the
+mobile app, asking the user to confirm the transaction. The contents of such message
+is prepared by the integrated system itself and can contain information which will
+help the user identify which transaction the message pertains to, e.g. the amount
+of a money transfer or info about the changed password. The user will have to confirm
+the transaction by pressing "YES" or deny it by pressing "NO".</p>
+
+<p>Confirmation of the transaction should be initiated only after a user is logged in and the user's
+unique Id and email address are known.</p>
+
+<p>The <code>Rublon2Factor.confirm()</code> method will check the user's protection status (using the email address hash)
+and return a URL address which the web browser should redirect to (if the user is protected by Rublon),
+or <code>null</code>, if the user protection is not active.</p>
+
+<table>
+    <caption><code>Rublon2Factor.confirm()</code> method arguments</caption>
+    <thead><tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Description</th>
+    </tr></thead>
+    <tbody>
+        <tr><td><code>callbackUrl</code></td><td>String</td><td>The integrated system's callback URL</td></tr>
+        <tr><td><code>userId</code></td><td>String</td><td>The integrated system's user's unique Id which will allow to log in the user upon successful authentication</td></tr>
+        <tr><td><code>userEmail</code></td><td>String</td><td>The user's email address in the integrated system which will allow to check the user's protection status and matching the user to a Rublon account</td></tr>
+        <tr><td><code>confirmMessage</code></td><td>String</td><td>Contents of the message displayed in the mobile app (max. 255 bytes).</td></tr>
+        <tr><td><code>consumerParams</code></td><td>JSONObject</td><td>Additional transaction parameters (optional).</td></tr>
+    </tbody>
+</table>
+
+<p><a id="confirm-init"></a></p>
+
+<h3>Initiating transaction confirmation</h3>
+
+<p>An example of confirming a sensitive transaction using Rublon:</p>
+
+<pre><code>/**
+ * Transaction confirmation.
+ * 
+ * @param transId Transaction Id
+ * @param amount Transaction amount
+ */
+void confirmTransaction(String transId, int amount) {
+
+    User user = Session.getUser();
+    Rublon2Factor rublon = new Rublon2Factor(
+        // systemToken:
+        "A69FC450848B4B94A040416DC4421523",
+        // secretKey:
+        "bLS6NDP7pGjg346S4IHqTHgQQjjSLw3CyApvz5iRjYzgIPN4e9EOi1cQJLrTlvLoHY8zeqg4ILrItYidKJ6JjEUZaA6pR1tZMwSZ"
+    );
+
+    try { // Initiate Rublon authentication
+
+        String url = rublon.confirm(
+            "http://example.com/rublon_transaction_confirm", // callback URL
+            user.getId(), // User Id
+            user.getEmail(), // User email
+            String.format("Do you confirm transaction no. %s with the amount of %d?", transId, amount),
+            // Additional transaction parameters:
+            new JSONObject() {{
+                put("transId", transId);
+            }}
+        );
+
+        if (url != null) { // Rublon protection is active
+
+            // Redirect the web browser to Rublon servers
+            // to confirm the transaction:
+            HttpServer.sendHeader("Location", url);
+
+        }
+
+    } catch (RublonException e) {
+        // An error occurred
+        HttpServer.setStatus(500);
+        HttpServer.setResponse("There was an error, please try again later.");
+    }
+
+    /* If we're here, the user's account is not protected by Rublon,
+    so the user should confirm the transaction some other way
+    or bypass the confirmation. */
+
+}
+</code></pre>
+
+<p>If the user's account is protected by Rublon, calling the <code>Rublon2Factor.confirm()</code> method will return a URL address which the user's web browser should redirect to so as to scan a QR code and confirm the transaction.</p>
+
+<p><a id="confirm-callback"></a></p>
+
+<h3>Finalizing the transaction</h3>
+
+<p>Finalizing the whole process involves invoking a callback URL, similarly to the authentication process. In the callback the user's answer to the transaction confirmation question, given by the user in the Rublon mobile app, can be obtained and processed. </p>
+
+<p>An example of confirming a transaction in the callback:</p>
+
+<pre><code>class Callback extends Rublon2FactorCallback {
+    public String getState() {
+        return HttpServer.getRequestHandler().getParam(PARAMETER_STATE);
+    }
+    public String getAccessToken() {
+        return HttpServer.getRequestHandler().getParam(PARAMETER_ACCESS_TOKEN);
+    }
+    protected void handleCancel() {
+        HttpServer.sendHeader("Location", "/transaction");
+    }
+    protected void handleError() {
+        HttpServer.sendHeader("Location", "/transaction?msg=rublon-error");
+    }
+    protected void userAuthenticated(String userId) {
+        JSONObject responseResult = getCredentials().getResponseResult();
+        String transId = responseResult.optString("transId", null);
+        if (transId != null) {
+            if (Credentials.CONFIRM_RESULT_YES == getCredentials().getConfirmResult()) {
+                // Transaction confirmed, do something with it:
+                transactionConfirmed(transId);
+            } else {
+                // Transaction denied, cancel and clean:
+                transaction_denied(transId);
+            }
+        }
+    }
+}
+
+...
+
+Rublon2Factor rublon = new Rublon2Factor(
+    "A69FC450848B4B94A040416DC4421523",
+    "bLS6NDP7pGjg346S4IHqTHgQQjjSLw3CyApvz5iRjYzgIPN4e9EOi1cQJLrTlvLoHY8zeqg4ILrItYidKJ6JjEUZaA6pR1tZMwSZ"
+);
+
+try {
+
+    Rublon2FactorCallback callback = new Rublon2FactorCallback(rublon);
+    callback.call();
+
+} catch (CallbackException e) {
+    // Please handle this error in the better way:
+    HttpServer.setStatus(500);
+    HttpServer.setResponse("There was an error, please try again later. " + e.getMessage());
+}
+</code></pre>
+
+<p><a id="email2fa"></a></p>
+
+<h2>Email2FA - simplified identity verification</h2>
+
+<p>For users of an integrated system who do not possess a Rublon account (they do
+not want to sign up or don't own a smartphone), Rublon provides a simplified form
+of two-factor identity verification. This feature employs an email message
+with an identity confirmation link sent to the email address of the user being
+authenticated, assuming that no one but that user has access to his/her email
+inbox. </p>
+
+<p class="notice">
+This feature is enabled by default. However
+developer can force users to authenticate using the mobile app, to avoid
+the Email2FA process, which can increase the security.
+The forcing mobile app feature is available only to systems integrated
+within the <em>Business plan</em>.
+<a href="https://developers.rublon.com/98/Pricing">Check the pricing</a>.
+</p>
+
+<p><a id="email2fa-how-it-works"></a></p>
+
+<h3>Principles of operation</h3>
+
+<ol>
+<li>Rublon looks for a Trusted Device, which will authenticate the user automatically.</li>
+<li>If a Trusted Device cannot be found, Rublon will check if a user with an email address
+provided by the integrated system is protected by Rublon. If such a user is found, the
+process involves using the mobile app.</li>
+<li>If no user is found (the user does not have a Rublon account), the Email2FA process
+is started.</li>
+<li>The user will receive an email with a identity confirmation link.</li>
+<li>After clicking the link, the user will be asked if the current browser should become a Trusted
+Device (signing in) or <a href="#confirm">a question about confirming a transaction will be displayed</a>.</li>
+<li>After answering the question, the user will be redirected to the integrated system's <a href="#callback">callback URL</a>
+and logged in (or the transaction initiated by the user will be confirmed).</li>
+</ol>
+
+<p><a id="email2fa-config"></a></p>
+
+<h3>Example usage</h3>
+
+<p>The use of Email2FA is by default active and looks the same as the <a href="#auth-example">Signing in process</a>.</p>
+
+<p><a id="gui"></a></p>
+
+<h2>GUI</h2>
+
+<p>The integrated system's users should be informed about the system's capability of protecting
+their accounts with Rublon. For web purposes, the <code>Rublon2FactorGUI</code> class has been prepared,
+responsible for generating a HTML code block called the "<em>Rublon Box</em>" that should be embedded
+in the integrated system. The block will contain information about the means to protect one's
+account.</p>
+
+<p>Rublon Box also contains a frame with a list of the user's Trusted Devices, displayed only when
+the current browser is also a Trusted Device. The frame allows for removal of any Trusted
+Device.</p>
+
+<p><a id="gui-example"></a></p>
+
+<h3>Example code</h3>
+
+<p>In order to generate the Rublon Box, you must instantiate a <code>Rublon2FactorGUI</code> class object
+and invoke its <code>toString()</code> method or cast the object to a string.</p>
+
+<pre><code>Rublon2Factor rublon = new Rublon2Factor(
+    "A69FC450848B4B94A040416DC4421523",
+    "bLS6NDP7pGjg346S4IHqTHgQQjjSLw3CyApvz5iRjYzgIPN4e9EOi1cQJLrTlvLoHY8zeqg4ILrItYidKJ6JjEUZaA6pR1tZMwSZ"
+);
+
+Rublon2FactorGUI gui = new Rublon2FactorGUI(rublon);
+
+// Set the user's data if user is logged-in:
+gui.setUserId(Session.getUser().getId());
+gui.setUserEmail(Session.getUser().getEmail());
+
+HttpServer.setResponseBody(gui.toString());
+</code></pre>
+
+<p><a id="gui-device-widget"></a></p>
+
+<h3>Trusted Devices Widget</h3>
+
+<p>If the current browser is the user's Trusted Device, a Widget with the user's Trusted Devices
+will be displayed along with the Rublon GUI. The Widget is an iframe containing a list
+of the user's Trusted Devices with the means to remove them.</p>
+
+<p><a id="business"></a></p>
+
+<h2>Business level features</h2>
+
+<p><a id="api-get-features"></a></p>
+
+<h3>Getting list of active features</h3>
+
+<p>Developer can obtain the list of active features for current integration using the following code.</p>
+
+<pre><code>try {
+
+    GetAvailableFeatures client = new GetAvailableFeatures(rublon); // Pass the Rublon2Factor instance.
+    client.perform();
+
+    // Here is the list of features:
+    JSONObject features = client.getFeatures();
+
+    // You can check a signle feature:
+    boolean isRemoteLogoutAvailable = features.optBoolean(GetAvailableFeatures.FEATURE_REMOTE_LOGOUT, false);
+
+} catch (RublonException e) {
+    // handle errors
+}
+</code></pre>
+
+<p><a id="confirm-feature"></a></p>
+
+<h3>Confirmations</h3>
+
+<p>The <a href="#confirm">Secure transaction confirmation</a> described in this document
+is an extra feature.</p>
+
+<p><a id="force-mobile-app"></a></p>
+
+<h3>Force mobile app</h3>
+
+<p>Developer can force users to authenticate by Rublon mobile app and deny
+access to users that are using the Email2FA. This will increase the
+security level, but also requires users to own a smartphone and install
+the Rublon application.</p>
+
+<p>To achieve this you have to pass the additional parameter in
+the consumerParams object during the initiation of the authentication process:</p>
+
+<pre><code>String url = rublon.auth(
+    "http://example.com/rublon_callback", // callback URL
+    Session.getUser().getId(), // User Id
+    Session.getUser().getEmail(), // User email
+    new JSONObject() {{
+        **put(RublonAuthParams.FIELD_FORCE_MOBILE_APP, true);**
+    }}
+);
+</code></pre>
+
+<p>You can just imagine a lot of use cases for this feature.
+For example, the Wordpress administrator which have installed the WP plugin (provided by us)
+can force choosen users' roles to authenticate using Rublon mobile app.</p>
+
+<p><a id="ignore-trusted-device"></a></p>
+
+<h3>Ignore Trusted Device</h3>
+
+<p>You can increase the security level in some cases, for example
+when user didn't login for last 30 days, by ignoring his
+Trusted Device during the Rublon authentication. Even if user's
+Trusted Device exists, he will be forced to scan the QR code.</p>
+
+<p>To achieve this you have to pass the additional parameter in
+the $consumerParams array during the initiation of the authentication process:</p>
+
+<pre><code>String url = rublon.auth(
+    "http://example.com/rublon_callback", // callback URL
+    Session.getUser().getId(), // User Id
+    Session.getUser().getEmail(), // User email
+    new JSONObject() {{
+        **put(RublonAuthParams.FIELD_IGNORE_TRUSTED_DEVICE, true);**
+    }}
+);
+</code></pre>
+
+<p><a id="buffered-confirmation"></a></p>
+
+<h2>Buffered confirmation</h2>
+
+<p>If you want to make life easier for your users and don't need
+extra high security level when users perform the multiple
+confirmations in a small amount of time, you can use the buffered
+confirmations feature.</p>
+
+<p>User will be required to confirm the first confirmation using
+the Rublon mobile app or clicking the confirmation link sent
+to his email address (when using Email2FA). Developer determines
+a time buffer withing the next user's confirmation will be
+accepted immediately, without the need to use the mobile app
+or checking the email. The only requirement is that the user's
+Trusted Device has to be present before performing the confirmation.
+Without a Trusted Device every transaction have to be confirmed manually.</p>
+
+<p>The following code shows how to determine the time buffer (in seconds)
+during the confirmation transaction initiation:</p>
+
+<pre><code>String url = rublon.auth(
+    "http://example.com/rublon_transaction_callback", // callback URL
+    Session.getUser().getId(), // User Id
+    Session.getUser().getEmail(), // User email
+    String.format("Do you confirm transaction no. %s with the amount of %d?", transId, amount),
+    new JSONObject() {{
+        put("transId", transId);
+        put(RublonAuthParams.FIELD_CONFIRM_TIME_BUFFER, 300); // 5 minutes
+    }}
+);
+</code></pre>
+
+<p><a id="sharing-access"></a></p>
+
+<h3>Sharing Access</h3>
+
+<p>When a user's account is protected by Rublon, there is no possibility to login
+by other people which are knowing the user name and password. But sometimes
+there is a need to do that, for example two administrators are using the same
+account to update the news feed on their website.</p>
+
+<p>For a such cases Rublon provides the Share Access feature.
+The Rublon user which is associated with the website's account (the host user)
+can share his access with other Rublon user (the client user).
+To achieve this, the host user have to enter the client user's email address
+in the Share Access Widget, which should be visible when displaying the <a href="#gui">Rublon GUI</a>
+(if the feature has been activated for the integration).</p>
+
+<p>The client user will be able to login to the website's account, but by default
+he won't be able to confirm operation. To enable confirmations for the client user,
+the host user have to click the "Enable confirming vulnerable operations" option
+on the Share Access Widget.</p>
+
+<p><a id="remote-logout"></a></p>
+
+<h3>Remote Logout</h3>
+
+<p>When a Rublon user removes his Trusted Devices, Rublon is able to notify all
+websites associated with this device that user has deleted the device.
+Websites which implemented the remote logout listeners can logout the user
+immediately and destroy his session for a security reasons.</p>
+
+<h4>Server-side listener</h4>
+
+<p>Developer can create a server-side logout listener which is based on the callback URL.
+Rublon server wants to notify your website about the deleted device will perform a REST
+request to the callback URL. You have to implement an additional method in
+the <code>Rublon2FactorCallback</code> subclass to handle this action.</p>
+
+<pre><code>class Callback extends Rublon2FactorCallback {
+    public String getState() {
+        return HttpServer.getRequestHandler().getParam(PARAMETER_STATE);
+    }
+    public String getAccessToken() {
+        return HttpServer.getRequestHandler().getParam(PARAMETER_ACCESS_TOKEN);
+    }
+    protected void handleCancel() {
+        HttpServer.sendHeader("Location", "/login");
+    }
+    protected void handleError() {
+        HttpServer.sendHeader("Location", "/login?msg=rublon-error");
+    }
+    protected void userAuthenticated(String userId) {
+        Session.setUser(User.getById(userId));
+        HttpServer.sendHeader("Location", "/dashboard");
+    }
+
+    protected void handleLogout() {
+        MyRemoteLogout logout = new MyRemoteLogout(getRublon());
+        logout.handle();
+    }
+
+}
+
+
+class MyRemoteLogout extends RemoteLogoutHandler {
+
+    protected String getHTTPRequestPOSTBody() {
+        return HttpServer.getRequest().getPostBody();
+    }
+
+    protected String getHTTPRequestHeader(String name) {
+        return HttpServer.getRequest().getHeader(name).first();
+    }
+
+    protected void setHTTPResponseBody(String body) {
+        HttpServer.setResponse(body);
+    }
+
+    protected void logoutUser(String userId, int deviceId) {
+        // Remove the session record from the database:
+        Database.query("DELETE FROM session WHERE user_id = %s AND (rublon_device_id = %d OR rublon_device_id IS NULL)",
+            userId, deviceId);
+    }
+
+}
+</code></pre>
+
+<p>As you can see, the user's session have to be associated with the device ID.
+This value can be obtained in the callback's userAuthenticated() method, as well as the
+Rublon user's profile ID which can be also handy:</p>
+
+<pre><code>protected void userAuthenticated(String userId) {
+
+    // The user is finally logged in
+    Session.setUser(User.getById(userId));
+
+    // Obtain the device ID:
+    String deviceId = getCredentials().getDeviceId();
+    Session.set("rublon_device_id", deviceId);
+
+    // Obtain the Rublon user's profile ID:
+    String profileId = getCredentials().getProfileId();
+    Session.set("rublon_profile_id", profileId);
+
+}
+</code></pre>
+
+<h4>Browser-side listener</h4>
+
+<p>Developer can add a browser-side logout listener which will listen the Rublon server
+by using the JavaScript long-pool request.</p>
+
+<p class="notice">
+Please do not use the browser-side listener as a default - do always use the server-side
+remote logout listeners. The browser-side listener is not the best way to logout user,
+because he may close the browser earlier or disable JavaScript and then won't be logged-out.
+However this way provides a good user-experience, because the user is logged out immediately.
+</p>
+
+<p>To enable the browser-side logout listener, embed the Rublon consumer script on every page in your website:</p>
+
+<pre><code>ConsumerScript script = new ConsumerScript(rublon, userId, userEmail, /* logoutListener = */ true);
+HttpServer.setResponse(script.toString());
+</code></pre>
+
+<p>Also you have to provide the JavaScript function which will actually logout the user:</p>
+
+<pre><code>&lt;script type="text/javascript"&gt;
+function RublonLogoutCallback() {
+    location.href = "/logout";
+}
+&lt;/script&gt;
+</code></pre>
+
+<h4>Checking the user's Trusted Device status</h4>
+
+<p>Developer can also use cron to check the user's Trusted Device status for active user's session
+and delete it when the Trusted Device has been removed.</p>
+
+<p class="notice">
+Please notice that not every user will create a Trusted Device when login to your website.
+</p>
+
+<p>To check the user's device status perform the following:</p>
+
+<pre><code>CheckUserDevice client = new CheckUserDevice(rublon, profileId, deviceId);
+client.perform();
+boolean isActive = client.isDeviceActive();
+</code></pre>
+
+<p>The profileId value you can obtain in the callback's userAuthenticated() method.</p>
+</body></html>
