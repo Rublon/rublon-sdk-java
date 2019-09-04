@@ -1,6 +1,0 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<project default="javadoc">
-    <target name="javadoc">
-        <javadoc access="package" author="true" classpath="lib/httpmime-4.2.5.jar:lib/commons-logging-1.1.1.jar:lib/httpcore-4.2.4.jar:lib/commons-codec-1.8.jar:lib/httpclient-4.2.5.jar:lib/org.json.jar" destdir="docs/javadoc" doctitle="Rublon Java SDK" nodeprecated="false" nodeprecatedlist="false" noindex="false" nonavbar="false" notree="false" packagenames="com.rublon.sdk.common.api,com.rublon.sdk.login.html,com.rublon.sdk.core.message,com.rublon.sdk.twofactor.html,com.rublon.sdk.login.api,com.rublon.sdk.core.exception,com.rublon.sdk.twofactor.api,com.rublon.sdk.login,com.rublon.sdk.twofactor,com.rublon.sdk.common.html,com.rublon.sdk.core,com.rublon.sdk.core.rest" source="1.6" sourcepath="src" splitindex="true" use="true" version="true"/>
-    </target>
-</project>
