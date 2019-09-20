@@ -76,7 +76,7 @@ public class RublonLoginBox extends RublonWidget {
 				"} else if (event.data && event.data.height) {" +
 					"var iframe = document.querySelectorAll('iframe#RublonLoginBoxWidget');" +
 					"for (var i = 0; i < iframe.length; i++ ) {" +
-						"iframe[i].style.height = event.data['height'] + 16 + 'px';" +
+						"iframe[i].style.height = event.data['height'] + 38 + 'px';" +
 					"}" +
 				"}" +
 			"}, true);" +
