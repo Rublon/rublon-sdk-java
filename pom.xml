@@ -61,7 +61,7 @@
 	</dependencies>
 
 	<properties>
-		<httpcomponents.version>4.4</httpcomponents.version>
+		<httpcomponents.version>4.5.13</httpcomponents.version>
 		<json.version>20160810</json.version>
 	</properties>
 
