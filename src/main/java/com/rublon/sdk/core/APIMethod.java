@@ -1,5 +1,6 @@
 package com.rublon.sdk.core;
 
+import com.rublon.sdk.core.util.Settings;
 import org.json.JSONObject;
 
 import com.rublon.sdk.core.exception.APIException;
@@ -19,7 +20,7 @@ abstract public class APIMethod {
 	/**
 	 * REST client instance.
 	 */
-	protected RESTClient client;
+	private RESTClient client;
 	
 	/**
 	 * Raw response body.
@@ -66,41 +67,15 @@ abstract public class APIMethod {
 	 */
 	public static final String HASH_ALG = "sha256";
 	
-	
 	/**
 	 * Construct the API method instance.
 	 * @param rublon
 	 */
-	protected APIMethod(RublonConsumer rublon) {
+	protected APIMethod(RublonConsumer rublon, RESTClient client) {
 		this.rublon = rublon;
-		client = new RESTClient(rublon);
-	}
-	
-	
-
-	/**
-	 * Get the raw response string.
-	 */
-	public String getRawResponse() {
-		return rawResponseBody;
-	}
-	
-	
-	/**
-	 * Get the response object.
-	 */
-	public JSONObject getResponse() {
-		return response;
+		this.client = client;
 	}
 
-	/**
-	 * Get the response result object.
-	 */
-	public JSONObject getResponseResult() {
-		return responseResult;
-	}
-	
-	
 	/**
 	 * Perform HTTP request
 	 *
@@ -122,10 +97,8 @@ abstract public class APIMethod {
 		
 		// Validate response
 		validateResponse();
-		
 	}
-	
-	
+
 	/**
 	 * Validate the API response.
 	 * @throws APIException
@@ -136,22 +109,19 @@ abstract public class APIMethod {
 				response = new JSONObject(rawResponseBody);
 				if (response != null && response.length() > 0) {
 					responseResult = response.optJSONObject(FIELD_RESULT);
-					if (responseResult != null && responseResult.length() > 0) {
-						String status = response.optString(FIELD_STATUS, null);
-						if (status != null) {
-							if (status.equals(STATUS_OK)) {
-								String signature = client.getSignature();
-								if (signature != null) {
-									if (validateSignature(signature, rawResponseBody)) {
-										// OK
-									} else throw new APIException.InvalidSignatureException(client, "Invalid response signature: "+ signature);
-								} else throw new APIException.MissingHeaderException(client, RESTClient.HEADER_NAME_SIGNATURE);
+					String status = response.optString(FIELD_STATUS, null);
+					if (status != null) {
+						if (status.equals(STATUS_OK)) {
+							String signature = client.getSignature();
+							if (signature != null) {
+								if (validateSignature(signature, rawResponseBody)) {
+									// OK
+								} else throw new APIException.InvalidSignatureException(client, "Invalid response signature: "+ signature);
 							}
-							else if (status.equals(STATUS_ERROR)) {
-								throw APIException.factory(client);
-							} else throw new APIException.InvalidFieldException(client, "Invalid status field", status);
-						} else throw new APIException.MissingFieldException(client, FIELD_STATUS);
-					} else throw new APIException.MissingFieldException(client, FIELD_RESULT);
+						} else if (status.equals(STATUS_ERROR)) {
+							throw APIException.factory(client);
+						} else throw new APIException.InvalidFieldException(client, "Invalid status field", status);
+					} else throw new APIException.MissingFieldException(client, FIELD_STATUS);
 				} else throw new APIException.InvalidJSONException(client);
 			} else throw new APIException(client, "Empty response body.");
 		} else throw new APIException(client, "Unexpected response HTTP status code: " + client.getHTTPStatusCode());
@@ -208,8 +178,9 @@ abstract public class APIMethod {
 	protected JSONObject getParams() {
 		return new JSONObject(){{
 			put(RublonAuthParams.FIELD_SYSTEM_TOKEN, rublon.getSystemToken());
-			put(RublonAuthParams.FIELD_VERSION, getRublon().getVersion());
-			put(RublonAuthParams.FIELD_VERSION_DATE, getRublon().getVersionDate());
+			put(RublonAuthParams.FIELD_PARAMS, new JSONObject() {{
+				put(RublonAuthParams.FIELD_SDK_VER, Settings.getInstance().getSdkVer());
+			}});
 		}};
 	}
 	

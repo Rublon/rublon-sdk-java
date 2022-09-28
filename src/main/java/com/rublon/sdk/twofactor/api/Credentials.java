@@ -2,6 +2,7 @@ package com.rublon.sdk.twofactor.api;
 
 
 import com.rublon.sdk.core.exception.RublonException;
+import com.rublon.sdk.core.rest.RESTClient;
 import org.json.JSONObject;
 
 import com.rublon.sdk.core.APIMethod;
@@ -29,25 +30,9 @@ public class Credentials extends APIMethod {
 	public static final String FIELD_CONFIRM_RESULT = "answer";
 	
 	/**
-	 * Positive confirmation result value.
-	 */
-	public static final String CONFIRM_RESULT_YES = "true";
-
-	/**
-	 * Nagative confirmation result value.
-	 */
-	public static final String CONFIRM_RESULT_NO = "false";
-	
-	/**
-	 * Field name for keeping info wether is project owner or not
-	 */
-	public static final String FIELD_PROJECT_OWNER = "projectOwner";
-	
-	/**
 	 * Access token.
 	 */
 	protected String accessToken;
-	
 
 	/**
 	 * Construct the API method instance.
@@ -55,8 +40,8 @@ public class Credentials extends APIMethod {
 	 * @param rublon Rublon instance.
 	 * @param accessToken Access token.
 	 */
-	public Credentials(Rublon rublon, String accessToken) throws RublonException {
-		super(rublon);
+	public Credentials(Rublon rublon, String accessToken, RESTClient client) throws RublonException {
+		super(rublon, client);
 
 		if (accessToken == null || !accessToken.matches("[a-z0-9]{60}")) {
 			throw new RublonException("Invalid access token.");
@@ -80,23 +65,6 @@ public class Credentials extends APIMethod {
 		return super.getParams()
 				.put(RublonAuthParams.FIELD_ACCESS_TOKEN, accessToken);
 	}
-	
-
-	/**
-	 * Get the user's local ID from the response.
-	 */
-	public String getAppUserId() {
-		return responseResult.optString(RublonAuthParams.FIELD_APP_USER_ID, null);
-	}
-
-
-	/**
-	 * Get the user's profile ID from the response.
-	 */
-	public String getProfileId() {
-		return responseResult.optString(RublonAuthParams.FIELD_PROFILE_ID, null);
-	}
-	
 
 	/**
 	 * Get the user's device ID from the response.
@@ -110,6 +78,13 @@ public class Credentials extends APIMethod {
 	 */
 	public String getConfirmResult() {
 		return responseResult.optString(FIELD_CONFIRM_RESULT, null);
+	}
+
+	/**
+	 * Get the user's name from the response.
+	 */
+	public String getUserName() {
+		return responseResult.optString(RublonAuthParams.FIELD_USER_NAME, null);
 	}
 
 }

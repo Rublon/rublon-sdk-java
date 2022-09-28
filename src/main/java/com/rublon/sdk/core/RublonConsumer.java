@@ -8,37 +8,21 @@ import com.rublon.sdk.core.exception.RublonException;
  * <p>
  * The main class provides common methods for all Rublon services.
  * In order for the class to work properly, it must be initiated with two parameters: System Token and the Secret Key.
- * Both of parameters can be obtained from developer dashboard at developers.rublon.com.
+ * Both of parameters can be obtained from developer dashboard at admin.rublon.com.
  * 
  * @author Rublon Developers
  */
 abstract public class RublonConsumer {
 
 	/**
-	 * API version number.
-	 */
-	public static final String VERSION = "0.0.1";
-	
-	/**
-	 * API version date.
-	 */
-	public static final String VERSION_DATE = "2017-12-05";
-	
-	/**
 	 * Default API server.
 	 */
 	public static final String DEFAULT_API_SERVER = "https://core.rublon.net";
 	
 	/**
-	 * Library target platform.
-	 */
-	public static final String PLATFORM = "java";
-	
-	/**
 	 * Default language code.
 	 */
 	public static final String DEFAULT_LANG = "en";
-
 
 	/**
 	 * System token.
@@ -58,11 +42,6 @@ abstract public class RublonConsumer {
 	protected String apiServer = null;
 	
 	/**
-	 * Service name.
-	 */
-	protected String serviceName = null;
-	
-	/**
 	 * Language code.
 	 * <p>
 	 * 2-letter language code compliant with <a href="https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes">ISO 639-1</a>.
@@ -70,21 +49,10 @@ abstract public class RublonConsumer {
 	protected String lang = null;
 
 	/**
-	 * Current URL address.
-	 */
-	protected String currentUrl = null;
-
-	/**
-	 * Whether the current user can configure the Rublon system token and secret key.
-	 */
-	protected boolean userCanConfigure = false;
-	
-
-	/**
 	 * Initialize RublonConsumer.
 	 * 
-	 * @param String systemToken
-	 * @param String secretKey
+	 * @param systemToken
+	 * @param secretKey
 	 */
 	public RublonConsumer(String systemToken, String secretKey) {
 		this(systemToken, secretKey, DEFAULT_API_SERVER);
@@ -94,9 +62,9 @@ abstract public class RublonConsumer {
 	/**
 	 * Initialize RublonConsumer.
 	 * 
-	 * @param String systemToken
-	 * @param String secretKey
-	 * @param String apiServer
+	 * @param systemToken
+	 * @param secretKey
+	 * @param apiServer
 	 */
 	public RublonConsumer(String systemToken, String secretKey, String apiServer) {
 		this.systemToken = systemToken;
@@ -144,31 +112,6 @@ abstract public class RublonConsumer {
 		return this.systemToken;
 	}
 
-
-	/**
-	 * Get version date.
-	 */
-	public String getVersionDate() {
-		return VERSION_DATE;
-	}
-	
-	
-	/**
-	 * Get version.
-	 */
-	public String getVersion() {
-		return VERSION;
-	}
-	
-	
-	/**
-	 * Get target platform name
-	 */
-	public String getPlatform() {
-		return PLATFORM;
-	}
-
-	
 	/**
 	 * Set language code
 	 * <p>
@@ -193,23 +136,6 @@ abstract public class RublonConsumer {
 	}
 	
 	/**
-	 * Get service name.
-	 */
-	public String getServiceName() {
-		return serviceName;
-	}
-	
-	/**
-	 * Set service name.
-	 * 
-	 * @param serviceName
-	 */
-	public RublonConsumer setServiceName(String serviceName) {
-		this.serviceName = serviceName;
-		return this;
-	}
-	
-	/**
 	 * Check whether the service is configured.
 	 */
 	public boolean isConfigured() {
@@ -227,42 +153,4 @@ abstract public class RublonConsumer {
 			throw new RublonException.ConfigurationException();
 		}
 	}
-
-
-	/**
-	 * Get current URL address.
-	 */
-	public String getCurrentUrl() {
-		return currentUrl;
-	}
-	
-	
-	/**
-	 * Set the current URL address.
-	 * @param url
-	 */
-	public RublonConsumer setCurrentUrl(String url) {
-		currentUrl = url;
-		return this;
-	}
-
-	/**
-	 * Check whether the current user can configure the Rublon system token and secret key.
-	 */
-	public boolean userCanConfigure() {
-		return userCanConfigure;
-	}
-	
-	
-	/**
-	 * Set the current URL address.
-	 * @param url
-	 */
-	public RublonConsumer setCurrentUrl(boolean can) {
-		userCanConfigure = can;
-		return this;
-	}
-	
-	
-
 }

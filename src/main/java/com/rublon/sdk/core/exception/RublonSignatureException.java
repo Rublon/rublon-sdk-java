@@ -7,17 +7,15 @@ package com.rublon.sdk.core.exception;
 public class RublonSignatureException extends RublonException {
 
 	/**
-	 * 
+	 * UID
 	 */
 	private static final long serialVersionUID = -41434156159068769L;
 
-		
 	/**
 	 * Constructor
 	 *
-	 * @param Message
-	 * @param Code
-	 * @param Previous exception
+	 * @param message
+	 * @param cause
 	 */
 	public RublonSignatureException(String message, Throwable cause) {
 		super(message, cause);
@@ -26,12 +24,9 @@ public class RublonSignatureException extends RublonException {
 	/**
 	 * Constructor
 	 * 
-	 * @param Message
+	 * @param message
 	 */
 	public RublonSignatureException(String message) {
 		super(message);
 	}
-
-
-
 }

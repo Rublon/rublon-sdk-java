@@ -19,14 +19,12 @@ abstract public class RublonCallback extends RublonHttpCallback {
 	 * Rublon instance.
 	 */
 	protected Rublon rublon;
-	
-	
+
 	/**
 	 * Authentication credentials instance.
 	 */
 	protected Credentials credentials;
-	
-	
+
 	/**
 	 * Constructor.
 	 * 
@@ -37,7 +35,6 @@ abstract public class RublonCallback extends RublonHttpCallback {
 		super(rublon);
 		this.rublon = rublon;
 	}
-	
 
 	/**
 	 * Finalize transaction for state "OK".
@@ -59,7 +56,7 @@ abstract public class RublonCallback extends RublonHttpCallback {
 		}
 		
 		// Authenticate user:
-		userAuthenticated(credentials.getAppUserId());
+		userAuthenticated(credentials.getUserName());
 		
 	}
 	
@@ -78,6 +75,5 @@ abstract public class RublonCallback extends RublonHttpCallback {
 	public Credentials getCredentials() {
 		return credentials;
 	}
-	
 
 }

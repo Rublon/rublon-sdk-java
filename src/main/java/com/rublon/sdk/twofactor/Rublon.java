@@ -6,9 +6,10 @@ import com.rublon.sdk.core.RublonConsumer;
 import com.rublon.sdk.core.exception.APIException;
 import com.rublon.sdk.core.exception.ConnectionException;
 import com.rublon.sdk.core.exception.RublonException;
-import com.rublon.sdk.core.html.RublonLoginBox;
+import com.rublon.sdk.core.rest.RESTClient;
 import com.rublon.sdk.twofactor.api.BeginTransaction;
 import com.rublon.sdk.twofactor.api.Credentials;
+import com.rublon.sdk.twofactor.api.Init;
 import org.json.JSONObject;
 
 /**
@@ -17,12 +18,8 @@ import org.json.JSONObject;
  * Create a subclass to override the specific methods.
  */
 public class Rublon extends RublonConsumer {
-	
-	
-	/**
-	 * Service name.
-	 */
-	private static final String SERVICE_NAME = "2factor";
+
+	private final RESTClient restClient;
 
 
 	/**
@@ -32,7 +29,7 @@ public class Rublon extends RublonConsumer {
 	 * @param secretKey
 	 */
 	public Rublon(String systemToken, String secretKey) {
-		this(systemToken, secretKey, DEFAULT_API_SERVER);
+		this(systemToken, secretKey, DEFAULT_API_SERVER, null);
 	}
 	
 
@@ -44,8 +41,68 @@ public class Rublon extends RublonConsumer {
 	 * @param apiServer Non-default API server URI for the development purposes.
 	 */
 	public Rublon(String systemToken, String secretKey, String apiServer) {
+		this(systemToken, secretKey, apiServer, null);
+	}
+
+	/**
+	 * Construct an instance with non-default API server URI.
+	 *
+	 * @param systemToken
+	 * @param secretKey
+	 * @param apiServer Non-default API server URI for the development purposes.
+	 */
+	public Rublon(String systemToken, String secretKey, String apiServer, RESTClient client) {
 		super(systemToken, secretKey, apiServer);
-		setServiceName(SERVICE_NAME);
+		if (client != null){
+			this.restClient = client;
+		}else{
+			this.restClient = new RESTClient(this);
+		}
+	}
+
+	/**
+	 * Validate Rublon configuration
+	 *
+	 * @param appVer
+	 * @throws APIException
+	 * @throws RublonException
+	 */
+	public void init(String appVer) throws APIException, RublonException {
+
+		if (!isConfigured()) {
+			throw new RublonException("Missing system token and secret key.");
+		}
+
+		try {
+			Init init = new Init(this, restClient, appVer);
+			init.perform();
+		} catch (RublonException e) {
+			throw e;
+		}
+
+	}
+
+	/**
+	 * Validate Rublon configuration
+	 *
+	 * @param appVer
+	 * @param params
+	 * @throws APIException
+	 * @throws RublonException
+	 */
+	public void init(String appVer, JSONObject params) throws APIException, RublonException {
+
+		if (!isConfigured()) {
+			throw new RublonException("Missing system token and secret key.");
+		}
+
+		try {
+			Init init = new Init(this, restClient, appVer, params);
+			init.perform();
+		} catch (RublonException e) {
+			throw e;
+		}
+
 	}
 
 	/**
@@ -64,15 +121,14 @@ public class Rublon extends RublonConsumer {
 	 * must be provided to the constructor. If not, function will throw an exception.
 	 *
 	 * @param callbackUrl Callback URL address.
-	 * @param appUserId User's ID in local system.
+	 * @param userName User's name.
 	 * @param userEmail User's email address.
-	 * @param consumerParams Additional transaction parameters.
-	 * @param isPasswordless Is passwordless login.
+	 * @param params Additional transaction parameters.
 	 * @return URL address to redirect or NULL if user is not protected.
 	 * @throws APIException
 	 * @throws RublonException
 	 */
-	public String auth(String callbackUrl, String appUserId, String userEmail, JSONObject consumerParams, boolean isPasswordless) throws APIException, RublonException {
+	public String auth(String callbackUrl, String userName, String userEmail, JSONObject params) throws APIException, RublonException {
 		
 		if (!isConfigured()) {
 			throw new RublonException("Missing system token and secret key.");
@@ -80,11 +136,11 @@ public class Rublon extends RublonConsumer {
 		
 		String lang = getLang();
 		if (lang != null) {
-			consumerParams.put(RublonAuthParams.FIELD_LANG, lang);
+			params.put(RublonAuthParams.FIELD_LANG, lang);
 		}
 		
 		try {
-			BeginTransaction beginTransaction = new BeginTransaction(this, callbackUrl, userEmail, appUserId, consumerParams, isPasswordless);
+			BeginTransaction beginTransaction = new BeginTransaction(this, callbackUrl, userName, userEmail, params, restClient);
 			beginTransaction.perform();
 			return beginTransaction.getWebURI();
 		} catch (RublonException e) {
@@ -96,137 +152,16 @@ public class Rublon extends RublonConsumer {
 	/**
 	 *
 	 * @param callbackUrl Callback URL address.
-	 * @param appUserId User's ID in local system.
-	 * @param userEmail User's email address.
-	 * @param consumerParams Additional transaction parameters.
-	 * @return URL address to redirect or NULL if user is not protected.
-	 * @throws APIException
-	 * @throws RublonException
-	 */
-
-	public String auth(String callbackUrl, String appUserId, String userEmail, JSONObject consumerParams) throws APIException, RublonException {
-		return auth(callbackUrl, appUserId, userEmail, consumerParams, false);
-	}
-	
-	/**
-	 *
-	 * @param callbackUrl Callback URL address.
-	 * @param appUserId User's ID in local system.
+	 * @param userName User's name.
 	 * @param userEmail User's email address.
 	 * @return URL address to redirect or NULL if user is not protected.
 	 * @throws APIException
 	 * @throws RublonException
 	 */
-	public String auth(String callbackUrl, String appUserId, String userEmail) throws APIException, RublonException {
-		return auth(callbackUrl, appUserId, userEmail, new JSONObject(), false);
+	public String auth(String callbackUrl, String userName, String userEmail) throws APIException, RublonException {
+		return auth(callbackUrl, userName, userEmail, new JSONObject());
 	}
 
-	/**
-	 * Authenticate user and perform an additional confirmation of the transaction.
-	 * 
-	 * This method requires user to use the Rublon mobile app
-	 * (even if the Trusted Device is available)
-	 * and confirm transaction to maintain higher security level.
-	 * 
-	 * For users which are using the email-2-factor method, the question
-	 * will be displayed in the web browser after clicking the confirmation
-	 * link sent to the user's email address.
-	 * 
-	 * The message passed in the $customMessage argument will be displayed
-	 * in the confirmation dialog.
-	 * 
-	 * @param callbackUrl
-	 * @param appUserId
-	 * @param userEmail
-	 * @param confirmMessage Message to display (max. 255 bytes).
-	 * @param consumerParams Additional transaction parameters.
-	 * @return URL to redirect or NULL if user is not protected.
-	 * @throws APIException 
-	 * @throws RublonException
-	 */
-	public String confirm(String callbackUrl, String appUserId, String userEmail, String confirmMessage, JSONObject consumerParams) throws APIException, RublonException {
-		consumerParams.put(RublonAuthParams.FIELD_CONFIRM_MESSAGE, confirmMessage);
-		String lang = getLang();
-		if (lang != null && lang.length() > 0) {
-			consumerParams.put(RublonAuthParams.FIELD_LANG, lang);
-		}
-		return auth(callbackUrl, appUserId, userEmail, consumerParams);
-	}
-	
-
-	/**
-	 * Authenticate user and perform an additional confirmation of the transaction.
-	 * 
-	 * This method requires user to use the Rublon mobile app
-	 * (even if the Trusted Device is available)
-	 * and confirm transaction to maintain higher security level.
-	 * 
-	 * For users which are using the email-2-factor method, the question
-	 * will be displayed in the web browser after clicking the confirmation
-	 * link sent to the user's email address.
-	 * 
-	 * The message passed in the $customMessage argument will be displayed
-	 * in the confirmation dialog.
-	 * 
-	 * @param callbackUrl
-	 * @param appUserId
-	 * @param userEmail
-	 * @param confirmMessage Message to display (max. 255 bytes).
-	 * @return URL to redirect or NULL if user is not protected.
-	 * @throws APIException 
-	 * @throws RublonException
-	 */
-	public String confirm(String callbackUrl, String appUserId, String userEmail, String confirmMessage) throws APIException, RublonException {
-		return confirm(callbackUrl, appUserId, userEmail, confirmMessage, new JSONObject());
-	}
-	
-	
-	/**
-	 * Perform a confirmation of the transaction without user's action needed
-	 * if the time buffer after previous confirmation has not been reached.
-	 *
-	 * If the amount of seconds after the previous transaction is less than
-	 * given time buffer, Rublon will confirm the transaction without user's action.
-	 * In other cases, this method will behave the same as the Rublon.confirm() method.
-	 *
-	 * @param callbackUrl
-	 * @param appUserId User's local ID.
-	 * @param userEmail User's email address.
-	 * @param confirmMessage Message to display (max. 255 bytes).
-	 * @param timeBuffer Amount of seconds from last confirmation.
-	 * @param consumerParams Additional transaction parameters.
-	 * @return URL to redirect or NULL if user is not protected.
-	 * @throws APIException 
-	 * @throws RublonException
-	 */
-	public String confirmWithBuffer(String callbackUrl, String appUserId, String userEmail, String confirmMessage, int timeBuffer, JSONObject consumerParams) throws APIException, RublonException {
-		consumerParams.put(RublonAuthParams.FIELD_CONFIRM_TIME_BUFFER, timeBuffer);
-		return confirm(callbackUrl, appUserId, userEmail, confirmMessage, consumerParams);
-	}
-	
-
-	/**
-	 * Perform a confirmation of the transaction without user's action needed
-	 * if the time buffer after previous confirmation has not been reached.
-	 *
-	 * If the amount of seconds after the previous transaction is less than
-	 * given time buffer, Rublon will confirm the transaction without user's action.
-	 * In other cases, this method will behave the same as the Rublon.confirm() method.
-	 *
-	 * @param callbackUrl
-	 * @param appUserId User's local ID.
-	 * @param userEmail User's email address.
-	 * @param confirmMessage Message to display (max. 255 bytes).
-	 * @param timeBuffer Amount of seconds from last confirmation.
-	 * @return URL to redirect or NULL if user is not protected.
-	 * @throws APIException 
-	 * @throws RublonException
-	 */
-	public String confirmWithBuffer(String callbackUrl, String appUserId, String userEmail, String confirmMessage, int timeBuffer) throws APIException, RublonException {
-		return confirmWithBuffer(callbackUrl, appUserId, userEmail, confirmMessage, timeBuffer, new JSONObject());
-	}
-	
-	
 	/**
 	 * Authenticate user and get user's credentials using one-time use access token.
 	 *
@@ -238,18 +173,8 @@ public class Rublon extends RublonConsumer {
 	 * @throws APIException 
 	 */
 	public Credentials getCredentials(String accessToken) throws RublonException {
-		Credentials credentials = new Credentials(this, accessToken);
+		Credentials credentials = new Credentials(this, accessToken, restClient);
 		credentials.perform();
 		return credentials;
 	}
-
-	/**
-	 * @return string
-	 */
-	public String getWidget() {
-		RublonLoginBox rublonLoginBox = new RublonLoginBox(getAPIServer());
-		return rublonLoginBox.toString();
-	}
-
-	
 }

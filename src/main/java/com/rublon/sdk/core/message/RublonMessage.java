@@ -40,13 +40,6 @@ public class RublonMessage {
 	 * Field name for message body
 	 */
 	static final String FIELD_BODY = "body";
-
-	/**
-	 * Field name for sign method
-	 */
-	static final String FIELD_SIGN_METHOD = "signMethod";
-	
-	
 	
 	/**
 	 * Simple constructor
@@ -59,7 +52,7 @@ public class RublonMessage {
 	/**
 	 * Construct Rublon Message from raw string
 	 * 
-	 * @param Raw string message
+	 * @param rawMessage string message
 	 * @throws RublonMessage.InvalidMessageException 
 	 * @throws RublonMessage.InvalidMessageTimeException
 	 */
@@ -91,7 +84,7 @@ public class RublonMessage {
 	/**
 	 * Set message body
 	 * 
-	 * @param Raw body string
+	 * @param body body string
 	 * @return Self instance
 	 */
 	public RublonMessage setBody(String body) {
@@ -104,8 +97,8 @@ public class RublonMessage {
 	/**
 	 * Set single header field
 	 * 
-	 * @param Field name
-	 * @param Value to set
+	 * @param name
+	 * @param value to set
 	 * @return Self instance
 	 */
 	public RublonMessage setHead(String name, Object value) {
@@ -127,7 +120,7 @@ public class RublonMessage {
 	/**
 	 * Set body object
 	 * 
-	 * @param Body object
+	 * @param body object
 	 * @return Self instance
 	 */
 	public RublonMessage setBody(JSONObject body) {

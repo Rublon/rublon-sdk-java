@@ -141,7 +141,11 @@ public class APIException extends RublonException {
 		@SuppressWarnings("rawtypes")
 		Class[] typesArray = new Class[args.length];
 		for (int i=0; i<args.length; i++) {
-			typesArray[i] = args[i].getClass();
+			if (args[i] instanceof RESTClient){
+				typesArray[i] = RESTClient.class;
+			}else {
+				typesArray[i] = args[i].getClass();
+			}
 		}
 		
 		@SuppressWarnings("rawtypes")
@@ -193,13 +197,12 @@ public class APIException extends RublonException {
 		map.put("UnknownAccessTokenException", APIException.UnknownAccessTokenException.class);
 		map.put("UnauthorizedUserException", APIException.UnauthorizedUserException.class);
 		map.put("ForbiddenMethodException", APIException.ForbiddenMethodException.class);
-		map.put("PersonalEditionLimitedException", APIException.PersonalEditionLimitedException.class);
 		map.put("UserBypassedException", APIException.UserBypassedException.class);
-		map.put("BusinessEditionLimitExceededException", APIException.BusinessEditionLimitExceededException.class);
 		map.put("ApplicationDeniedException", APIException.ApplicationDeniedException.class);
 		map.put("ApplicationDisabledException", APIException.ApplicationDisabledException.class);
 		map.put("SubscriptionExpiredException", SubscriptionExpiredException.class);
 		map.put("UserDeniedException", APIException.UserDeniedException.class);
+		map.put("TransactionLockedException", APIException.TransactionLockedException.class);
 		
 		if (map.containsKey(name)) {
 			return map.get(name);
@@ -267,15 +270,6 @@ public class APIException extends RublonException {
 		}
 	}
 	
-	static public class PersonalEditionLimitedException extends APIException {
-		public PersonalEditionLimitedException (RESTClient client, String message) {
-			super(client, message);
-		}
-		public PersonalEditionLimitedException (RESTClient client) {
-			this(client, null);
-		}
-	}
-	
 	static public class AccessTokenExpiredException extends APIException {
 		public AccessTokenExpiredException(RESTClient client, String message) {
 			super(client, message);
@@ -312,15 +306,6 @@ public class APIException extends RublonException {
 		}
 	}
 
-	static public class BusinessEditionLimitExceededException extends APIException {
-		public BusinessEditionLimitExceededException(RESTClient client, String message) {
-			super(client, message);
-		}
-		public BusinessEditionLimitExceededException(RESTClient client) {
-			this(client, null);
-		}
-	}
-
 	static public class ApplicationDeniedException extends APIException {
 		public ApplicationDeniedException(RESTClient client, String message) {
 			super(client, message);
@@ -353,6 +338,15 @@ public class APIException extends RublonException {
 			super(client, message);
 		}
 		public UserDeniedException(RESTClient client) {
+			this(client, null);
+		}
+	}
+
+	static public class TransactionLockedException extends APIException{
+		public TransactionLockedException(RESTClient client, String message) {
+			super(client, message);
+		}
+		public TransactionLockedException(RESTClient client) {
 			this(client, null);
 		}
 	}

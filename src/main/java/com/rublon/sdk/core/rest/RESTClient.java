@@ -1,8 +1,9 @@
 package com.rublon.sdk.core.rest;
 
 
-import java.io.IOException;
-
+import com.rublon.sdk.core.RublonConsumer;
+import com.rublon.sdk.core.exception.ConnectionException;
+import com.rublon.sdk.core.message.RublonSignature;
 import org.apache.http.Header;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -13,10 +14,7 @@ import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.util.EntityUtils;
 
-import com.rublon.sdk.core.RublonConsumer;
-import com.rublon.sdk.core.exception.ConnectionException;
-import com.rublon.sdk.core.message.RublonSignature;
-
+import java.io.IOException;
 
 /**
  * REST client class.
@@ -48,36 +46,18 @@ public class RESTClient {
 	 * Value of the "Accept" HTTP header
 	 */
 	public static final String HEADER_VALUE_ACCEPT = "application/json, text/javascript, */*; q=0.01";
-
-	/**
-	 * Name of the custom HTTP header to send the library's version
-	 */
-	public static final String HEADER_NAME_VERSION = "X-Rublon-API-Version";
-	
-	/**
-	 * Name of the custom HTTP header to send the library's version date
-	 */
-	public static final String HEADER_NAME_VERSION_DATE = "X-Rublon-API-Version-Date";
-
-	/**
-	 * Name of the custom HTTP heaader to send the library's platform
-	 */
-	public static final String HEADER_NAME_PLATFORM = "Rublon-Consumer-Platform";
 	
 	/**
 	 * Name of the custom HTTP header to send the library's technology
 	 */
 	public static final String HEADER_NAME_SIGNATURE = "X-Rublon-Signature";
-	
+
+	private String secretKey;
+
 	/**
 	 * HTTP POST request handler.
 	 */
 	HttpPost httppost;
-	
-	/**
-	 * Rublon Consumer instance
-	 */
-	RublonConsumer rublon;
 
 	/**
 	 * Raw response string.
@@ -95,10 +75,14 @@ public class RESTClient {
 	 * @param rublon instance
 	 */
 	public RESTClient(RublonConsumer rublon) {
-		this.rublon = rublon;
+		this.secretKey =  rublon.getSecretKey();
 	}
-	
-	
+
+	public RESTClient(String secretKey) {
+		this.secretKey = secretKey;
+	}
+
+
 	/**
 	 * Perform the request
 	 * 
@@ -113,12 +97,9 @@ public class RESTClient {
 		httppost.setHeader("Content-Type", RESTClient.HEADER_VALUE_CONTENT_TYPE);
 		httppost.setHeader("Accept", RESTClient.HEADER_VALUE_ACCEPT);
 		httppost.setHeader("User-Agent", USER_AGENT);
-		httppost.setHeader(HEADER_NAME_VERSION, this.rublon.getVersion());
-		httppost.setHeader(HEADER_NAME_VERSION_DATE, this.rublon.getVersionDate());
-		httppost.setHeader(HEADER_NAME_PLATFORM, RublonConsumer.PLATFORM);
-		httppost.setHeader(HEADER_NAME_SIGNATURE, RublonSignature.sign(rawPostBody, rublon.getSecretKey()));
+		httppost.setHeader(HEADER_NAME_SIGNATURE, RublonSignature.sign(rawPostBody,secretKey));
 		
-		CloseableHttpClient httpclient = HttpClientBuilder.create().build();
+		CloseableHttpClient httpclient = createHttpClient();
 		try {
 			RequestConfig reqConfig = RequestConfig.custom().
 					setConnectionRequestTimeout(TIMEOUT * 1000).
@@ -146,7 +127,11 @@ public class RESTClient {
 		
 		return rawResponse;
 	}
-	
+
+	protected CloseableHttpClient createHttpClient() {
+		return HttpClientBuilder.create().useSystemProperties().build();
+	}
+
 	/**
 	 * Get the raw response body string.
 	 */
@@ -204,4 +189,11 @@ public class RESTClient {
 		}
 	}
 
+	public String getSecretKey() {
+		return secretKey;
+	}
+
+	public void setSecretKey(String secretKey) {
+		this.secretKey = secretKey;
+	}
 }

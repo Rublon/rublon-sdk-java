@@ -1,11 +1,11 @@
 package com.rublon.sdk.twofactor.api;
 
 
+import com.rublon.sdk.core.rest.RESTClient;
 import com.rublon.sdk.twofactor.Rublon;
 import org.json.JSONObject;
 
 import com.rublon.sdk.core.APIMethod;
-import com.rublon.sdk.core.Codec;
 import com.rublon.sdk.core.RublonAuthParams;
 
 /**
@@ -35,55 +35,33 @@ public class BeginTransaction extends APIMethod {
 	protected String userEmail;
 	
 	/**
-	 * User's local ID.
-	 */
-	protected String appUserId;
-	
-	/**
 	 * Additional transaction parameters.
 	 */
-	protected JSONObject consumerParams;
+	protected JSONObject params;
 
 	/**
-	 * Is passwordless login
+	 * User's name address.
 	 */
-	protected boolean isPasswordless;
-	
+	protected String userName;
 
 	/**
 	 * Construct the API method instance.
 	 * 
 	 * @param rublon Rublon instance.
 	 * @param callbackUrl URL of the callback method.
+	 * @param userName User's name.
 	 * @param userEmail User's email address.
-	 * @param appUserId User's local ID.
-	 * @param consumerParams Additional transaction parameters.
-	 * @param isPasswordless Is passwordless login.
+	 * @param params Additional transaction parameters.
+	 * @param restClient Rest client
 	 */
-	public BeginTransaction(Rublon rublon, String callbackUrl,
-                            String userEmail, String appUserId, JSONObject consumerParams, boolean isPasswordless) {
-		super(rublon);
+	public BeginTransaction(Rublon rublon, String callbackUrl, String userName,
+							String userEmail, JSONObject params, RESTClient restClient) {
+		super(rublon, restClient);
 		this.callbackUrl = callbackUrl;
+		this.userName = userName;
 		this.userEmail = userEmail;
-		this.appUserId = appUserId;
-		this.consumerParams = consumerParams;
-		this.isPasswordless = isPasswordless;
+		this.params = params;
 	}
-	
-
-	/**
-	 * Construct the API method instance.
-	 * 
-	 * @param rublon Rublon instance.
-	 * @param callbackUrl URL of the callback method.
-	 * @param userEmail User's email address.
-	 * @param appUserId User's local ID.
-	 */
-	public BeginTransaction(Rublon rublon, String callbackUrl,
-                            String userEmail, String appUserId) {
-		this(rublon, callbackUrl, userEmail, appUserId, new JSONObject(), false);
-	}
-	
 
 	/**
 	 * Get the web URI from the API response and redirect the user's web browser.
@@ -105,17 +83,17 @@ public class BeginTransaction extends APIMethod {
 	 * Get the API request parameters.
 	 */
 	protected JSONObject getParams() {
-		JSONObject consumerParamJson = new JSONObject();
-		consumerParamJson.put("consumerParams", consumerParams);
 		return RublonAuthParams.mergeJSONObjects(new JSONObject[] {
-			consumerParamJson,
 			super.getParams(),
 			new JSONObject() {{
-				put(RublonAuthParams.FIELD_APP_USER_ID, appUserId);
-				put(RublonAuthParams.FIELD_USER_EMAIL_HASH, Codec.sha256(userEmail.toLowerCase()));
 				put(RublonAuthParams.FIELD_CALLBACK_URL, callbackUrl);
-				put(RublonAuthParams.FIELD_USER_EMAIL, userEmail.toLowerCase());
-				put(RublonAuthParams.FIELD_PASSWORDLESS, isPasswordless);
+				if (userEmail != null && !userEmail.isEmpty()) {
+					put(RublonAuthParams.FIELD_USER_EMAIL, userEmail.toLowerCase());
+				}
+				put(RublonAuthParams.FIELD_USER_NAME, userName);
+				if (params != null) {
+					put(RublonAuthParams.FIELD_PARAMS, params);
+				}
 			}}
 		});
 	}

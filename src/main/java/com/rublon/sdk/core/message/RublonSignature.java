@@ -68,7 +68,7 @@ public class RublonSignature {
 	/**
 	 * Construct Rublon signature with default sign method
 	 * 
-	 * @param Secret key for signing message
+	 * @param secretKey key for signing message
 	 */
 	public RublonSignature(String secretKey) {
 		this.secretKey = secretKey;
@@ -78,9 +78,9 @@ public class RublonSignature {
 	/**
 	 * Parse raw string message and create RublonMessage object
 	 * 
-	 * @param Raw string message
+	 * @param rawInput string message
 	 * @return Self instance
-	 * @throws RublonMessage.InvalidResponseException
+	 * @throws RublonMessage
 	 * @throws RublonSignatureException
 	 * @throws RublonMessage.InvalidMessageTimeException 
 	 */
@@ -109,7 +109,7 @@ public class RublonSignature {
 	/**
 	 * Set message object
 	 * 
-	 * @param Rublon message instance
+	 * @param message instance
 	 * @return Self instance
 	 */
 	public RublonSignature setMessage(RublonMessage message) {
@@ -145,8 +145,8 @@ public class RublonSignature {
 	/**
 	 * Sign given data with secret key and get the signature
 	 * 
-	 * @param Raw string data to sign
-	 * @param Secret key
+	 * @param rawData string data to sign
+	 * @param secretKey key
 	 * @return Signature string
 	 */
 	public static String sign(String rawData, String secretKey) {
@@ -192,9 +192,9 @@ public class RublonSignature {
 	/**
 	 * Verify data by signature and secret key
 	 *
-	 * @param Data to sign
-	 * @param Secret key used to create the signature
-	 * @param Computed signature to verify
+	 * @param data to sign
+	 * @param secretKey key used to create the signature
+	 * @param sign signature to verify
 	 * @return bool
 	 */
 	public static boolean verifyData(String data, String secretKey, String sign) {
@@ -206,9 +206,9 @@ public class RublonSignature {
 	/**
 	 * Verify data by signature and secret key
 	 *
-	 * @param Data to sign
-	 * @param Secret key used to create the signature
-	 * @param Computed signature to verify
+	 * @param data to sign
+	 * @param secretKey key used to create the signature
+	 * @param sign signature to verify
 	 * @return bool
 	 */
 	public static boolean verifyData(JSONObject data, String secretKey, String sign) {

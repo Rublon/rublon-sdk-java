@@ -11,13 +11,11 @@ public class ConnectionException extends RublonException {
 	 */
 	private static final long serialVersionUID = -4130434156159068769L;
 
-		
 	/**
 	 * Constructor
 	 *
-	 * @param Message
-	 * @param Code
-	 * @param Previous exception
+	 * @param message
+	 * @param cause
 	 */
 	public ConnectionException(String message, Throwable cause) {
 		super(message, cause);
@@ -26,7 +24,7 @@ public class ConnectionException extends RublonException {
 	/**
 	 * Constructor
 	 * 
-	 * @param Message
+	 * @param message
 	 */
 	public ConnectionException(String message) {
 		super(message);

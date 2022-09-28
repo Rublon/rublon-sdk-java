@@ -12,15 +12,11 @@ abstract public class RublonHttpCallback {
 	 * State GET parameter name.
 	 */
 	public static final String PARAMETER_STATE = "rublonState";
-
-	public static final String PARAMETER_STATE_OLD = "state";
 	
 	/**
 	 * Access token GET parameter name.
 	 */
 	public static final String PARAMETER_ACCESS_TOKEN = "rublonToken";
-	
-	public static final String PARAMETER_ACCESS_TOKEN_OLD = "token";
 	
 	/**
 	 * Custom URI param GET parameter name.
@@ -36,19 +32,11 @@ abstract public class RublonHttpCallback {
 	 * Error state value.
 	 */
 	public static final String STATE_ERROR = "error";
-	
-	/**
-	 * Logout state value.
-	 */
-	public static final String STATE_LOGOUT = "logout";
-	
 
 	/**
 	 * Instance of the Rublon Consumer.
 	 */
 	protected RublonConsumer rublon;
-	
-	
 
 	/**
 	 * Constructor.
@@ -73,18 +61,13 @@ abstract public class RublonHttpCallback {
 		
 		if (state.equals(STATE_OK)) {
 			finalizeTransaction();
-		}
-		else if (state.equals(STATE_ERROR)) {
+		} else if (state.equals(STATE_ERROR)) {
 			handleError();
-		}
-		else if (state.equals(STATE_LOGOUT)) {
-			handleLogout();
 		} else {
 			handleCancel();
 		}
 	
 	}
-	
 	
 	/**
 	 * Finalize transaction for state "OK".
@@ -107,19 +90,7 @@ abstract public class RublonHttpCallback {
 	public RublonConsumer getRublon() {
 		return rublon;
 	}
-	
-	
-	/**
-	 * Optional method to handle the remote logout requests.
-	 * 
-	 * Override in a subclass if you want to implement the Remote Logout.
-	 * You can use the provided RemoteLogoutHandler abstract class.
-	 */
-	protected void handleLogout() {
-		// hello
-	}
-	
-	
+
 	/**
 	 * Handle authentication success.
 	 * 
@@ -172,6 +143,5 @@ abstract public class RublonHttpCallback {
 		}
 		
 	}
-
 
 }

@@ -1,0 +1,618 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="refresh" content="500">
+    <title>Rublon Java SDK</title>
+
+
+    <style type="text/css">
+        /* GitHub stylesheet for MarkdownPad (http://markdownpad.com) */
+        /* Author: Nicolas Hery - http://nicolashery.com */
+        /* Version: b13fe65ca28d2e568c6ed5d7f06581183df8f2ff */
+        /* Source: https://github.com/nicolahery/markdownpad-github */
+
+        /* RESET
+        =============================================================================*/
+
+        html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
+            margin: 0;
+            padding: 0;
+            border: 0;
+        }
+
+        a:visited {border: none;}
+
+        /* BODY
+        =============================================================================*/
+
+        body {
+            font-family: Helvetica, arial, freesans, clean, sans-serif;
+            font-size: 14px;
+            line-height: 1.6;
+            color: #333;
+            background-color: #fff;
+            padding: 20px;
+            max-width: 960px;
+            margin: 0 auto;
+        }
+
+        body>*:first-child {
+            margin-top: 0 !important;
+        }
+
+        body>*:last-child {
+            margin-bottom: 0 !important;
+        }
+
+        /* BLOCKS
+        =============================================================================*/
+
+        p, blockquote, ul, ol, dl, table, pre {
+            margin: 15px 0;
+        }
+
+        /* HEADERS
+        =============================================================================*/
+
+        h1, h2, h3, h4, h5, h6 {
+            margin: 20px 0 10px;
+            padding: 0;
+            font-weight: bold;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        h1 tt, h1 code, h2 tt, h2 code, h3 tt, h3 code, h4 tt, h4 code, h5 tt, h5 code, h6 tt, h6 code {
+            font-size: inherit;
+        }
+
+        h1 {
+            font-size: 28px;
+            color: #000;
+        }
+
+        h2 {
+            font-size: 24px;
+            border-bottom: 1px solid #ccc;
+            color: #000;
+        }
+
+        h3 {
+            font-size: 20px;
+        }
+
+        h4 {
+            font-size: 16px;
+            font-family: Georgia, Serif;
+        }
+
+        h5 {
+            font-size: 14px;
+        }
+
+        h6 {
+            color: #777;
+            font-size: 14px;
+        }
+
+        body>h2:first-child, body>h1:first-child, body>h1:first-child+h2, body>h3:first-child, body>h4:first-child, body>h5:first-child, body>h6:first-child {
+            margin-top: 0;
+            padding-top: 0;
+        }
+
+        a:first-child h1, a:first-child h2, a:first-child h3, a:first-child h4, a:first-child h5, a:first-child h6 {
+            margin-top: 0;
+            padding-top: 0;
+        }
+
+        h1+p, h2+p, h3+p, h4+p, h5+p, h6+p {
+            margin-top: 10px;
+        }
+
+        /* LINKS
+        =============================================================================*/
+
+        a {
+            color: #4183C4;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        /* LISTS
+        =============================================================================*/
+
+        ul, ol {
+            padding-left: 30px;
+        }
+
+        ul li > :first-child,
+        ol li > :first-child,
+        ul li ul:first-of-type,
+        ol li ol:first-of-type,
+        ul li ol:first-of-type,
+        ol li ul:first-of-type {
+            margin-top: 0px;
+        }
+
+        ul ul, ul ol, ol ol, ol ul {
+            margin-bottom: 0;
+        }
+
+        dl {
+            padding: 0;
+        }
+
+        dl dt {
+            font-size: 14px;
+            font-weight: bold;
+            font-style: italic;
+            padding: 0;
+            margin: 15px 0 5px;
+        }
+
+        dl dt:first-child {
+            padding: 0;
+        }
+
+        dl dt>:first-child {
+            margin-top: 0px;
+        }
+
+        dl dt>:last-child {
+            margin-bottom: 0px;
+        }
+
+        dl dd {
+            margin: 0 0 15px;
+            padding: 0 15px;
+        }
+
+        dl dd>:first-child {
+            margin-top: 0px;
+        }
+
+        dl dd>:last-child {
+            margin-bottom: 0px;
+        }
+
+        /* CODE
+        =============================================================================*/
+
+        pre, code, tt {
+            font-size: 12px;
+            font-family: Consolas, "Liberation Mono", Courier, monospace;
+        }
+
+        code, tt {
+            margin: 0 0px;
+            padding: 0px 0px;
+            white-space: nowrap;
+            border: 1px solid #eaeaea;
+            background-color: #f8f8f8;
+            border-radius: 3px;
+        }
+
+        pre>code {
+            margin: 0;
+            padding: 0;
+            white-space: pre;
+            border: none;
+            background: transparent;
+        }
+
+        pre {
+            background-color: #f0f0f0;
+            border: 1px solid #ccc;
+            font-size: 13px;
+            line-height: 19px;
+            overflow: auto;
+            padding: 6px 10px;
+            border-radius: 3px;
+        }
+
+        pre code, pre tt {
+            background-color: transparent;
+            border: none;
+        }
+
+        kbd {
+            -moz-border-bottom-colors: none;
+            -moz-border-left-colors: none;
+            -moz-border-right-colors: none;
+            -moz-border-top-colors: none;
+            background-color: #DDDDDD;
+            background-image: linear-gradient(#F1F1F1, #DDDDDD);
+            background-repeat: repeat-x;
+            border-color: #DDDDDD #CCCCCC #CCCCCC #DDDDDD;
+            border-image: none;
+            border-radius: 2px 2px 2px 2px;
+            border-style: solid;
+            border-width: 1px;
+            font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+            line-height: 10px;
+            padding: 1px 4px;
+        }
+
+        /* QUOTES
+        =============================================================================*/
+
+        blockquote {
+            border-left: 4px solid #DDD;
+            padding: 0 15px;
+            color: #777;
+        }
+
+        blockquote>:first-child {
+            margin-top: 0px;
+        }
+
+        blockquote>:last-child {
+            margin-bottom: 0px;
+        }
+
+        /* HORIZONTAL RULES
+        =============================================================================*/
+
+        hr {
+            clear: both;
+            margin: 15px 0;
+            height: 0px;
+            overflow: hidden;
+            border: none;
+            background: transparent;
+            border-bottom: 4px solid #ddd;
+            padding: 0;
+        }
+
+        /* TABLES
+        =============================================================================*/
+
+        table {width: 100%;}
+
+        caption {text-align: left; font-weight: bold;}
+
+        table th {
+            font-weight: bold;
+        }
+
+        table th, table td {
+            border: 1px solid #ccc;
+            padding: 6px 13px;
+        }
+
+        table tr {
+            border-top: 1px solid #ccc;
+            background-color: #fff;
+        }
+
+        table tr:nth-child(2n) {
+            background-color: #f8f8f8;
+        }
+
+        table td:first-child {width: 20%;}
+        table td:last-child {width: 60%;}
+
+
+        /* IMAGES
+        =============================================================================*/
+
+        img {
+            max-width: 100%
+        }
+
+        .notice {background: #ffffcc; padding: 1em; border: 1px solid #ffe066;}
+
+    </style>
+
+</head>
+<h1 id="rublon-java-sdk">Rublon Java SDK</h1>
+<h2 id="table-of-contents">Table of Contents</h2>
+<ol>
+    <li><a href="#overview">Overview</a></li>
+    <li><a href="#use-cases">Use Cases</a></li>
+    <li><a href="#supported-authentication-methods">Supported Authentication Methods</a></li>
+    <li><a href="#before-you-start">Before You Start</a><ul>
+        <li>Create an Application in the Rublon Admin Console</li>
+        <li>Optional: Install Rublon Authenticator</li>
+    </ul>
+    </li>
+    <li><a href="#configuration">Configuration</a><ul>
+        <li>INFO: Initial Assumptions</li>
+        <li>INFO: Modifying the Library</li>
+        <li>Initialize the Library</li>
+        <li>Perform Authentication</li>
+        <li>Finalize Authentication</li>
+    </ul>
+    </li>
+    <li><a href="#troubleshooting">Troubleshooting</a></li>
+</ol>
+<p><a id="overview"></a></p>
+<h2 id="overview">Overview</h2>
+<p>The Rublon Java SDK library is a client-side implementation of the Rublon API written in Java.
+    It includes methods for connecting with the Rublon API and embedding the service&#39;s GUI in an HTML-based environment.
+    It forms a convenient Java coding language facade for Rublon API&#39;s REST interface.</p>
+<p><a id="use-cases"></a></p>
+<h2 id="use-cases">Use Cases</h2>
+<p>Rublon adds an extra layer of security by prompting the user to authenticate using an extra authentication method such as Mobile Push.
+    Even if a malicious actor compromises the user&#39;s password, the hacker would not be able to log in to the user&#39;s account because the second secure factor will thwart them.</p>
+<p>Rublon can add an extra layer of security in the following two use cases:</p>
+<ol>
+    <li><strong>When a user signs in to a system</strong> (after the user enters the correct password)</li>
+    <li><strong>When a user undergoes a security-sensitive transaction</strong> (such as changing the password or conducting a money transfer)</li>
+</ol>
+<p>When a user signs in to a system, the second authentication factor should be initiated only after:</p>
+<ul>
+    <li>the user has successfully completed the first authentication factor (e.g., entered the correct password)</li>
+    <li>the username (and optionally, email address) have been gathered</li>
+</ul>
+<p><a id="supported-authentication-methods"></a></p>
+<h2 id="supported-authentication-methods">Supported Authentication Methods</h2>
+<ul>
+    <li><a href="https://rublon.com/product/mobile-push/">Mobile Push</a> - approve the authentication request by tapping a push notification displayed on the Rublon Authenticator mobile app.</li>
+    <li><a href="https://rublon.com/product/mobile-passcodes/">Mobile Passcodes</a> (TOTP) - enter the TOTP code (Time-Based One Time Password) using the Rublon Authenticator mobile app.</li>
+    <li><a href="https://rublon.com/product/sms-passcodes/">SMS Passcodes</a> - enter the verification code from the SMS sent to your mobile phone number.</li>
+    <li><a href="https://rublon.com/product/qr-codes/">QR Codes</a> - scan a QR code using the Rublon Authenticator mobile app.</li>
+    <li><a href="https://rublon.com/product/email-link/">Email Links</a> - Click the verification link sent to your email address.</li>
+    <li><a href="https://rublon.com/product/security-keys/">WebAuthn/U2F Security Keys</a> - Insert the security key into the USB port of your computer and touch it.</li>
+</ul>
+<p><a id="before-you-start"></a></p>
+<h2 id="before-you-start">Before You Start</h2>
+<p>Before you start implementing the Rublon Java SDK library into your code, you must create an application in the Rublon Admin Console. We also recommend that you install the Rublon Authenticator mobile app.</p>
+<h3 id="create-an-application-in-the-rublon-admin-console">Create an Application in the Rublon Admin Console</h3>
+<ol>
+    <li>Sign up for the Rublon Admin Console. <a href="https://rublon.com/doc/admin-console/#rublon-account-registration">Here&#39s how</a>.</li>
+    <li>In the Rublon Admin Console, go to the <strong>Applications</strong> tab and click <strong>Add Application</strong>.</li>
+    <li>Enter a name for your application and then set the type to <strong>Custom integration using Java SDK</strong>.</li>
+    <li>Click <strong>Save</strong> to add the new Java SDK application in the Rublon Admin Console.</li>
+    <li>Copy and save the values of <strong>System Token</strong> and <strong>Secret Key</strong>. You are going to need these values later.</li>
+</ol>
+<h3 id="optional-install-rublon-authenticator">Optional: Install Rublon Authenticator</h3>
+<p>For increased security of Multi-Factor Authentication (MFA), end-users are recommended to install the <a href="https://rublon.com/product/rublon-authenticator/">Rublon Authenticator</a> mobile app.</p>
+<p>Download the Rublon Authenticator for:</p>
+<ul>
+    <li><a href="https://play.google.com/store/apps/details?id=com.rublon.authenticator&amp;hl=en">Android</a></li>
+    <li><a href="https://apps.apple.com/us/app/rublon-authenticator/id1434412791">iOS</a></li>
+</ul>
+<p>After installing the mobile app, users can authenticate using the following authentication methods:</p>
+<ul>
+    <li><a href="https://rublon.com/product/mobile-push/">Mobile Push</a></li>
+    <li><a href="https://rublon.com/product/mobile-passcodes/">Mobile Passcode</a></li>
+    <li><a href="https://rublon.com/product/qr-codes/">QR Code</a></li>
+</ul>
+<p>In some cases, users may not want to install any additional apps on their phones. Also, some users own older phones that do not support modern mobile applications. These users can authenticate using one of the following authentication methods instead:</p>
+<ul>
+    <li><a href="https://rublon.com/product/security-keys/">WebAuthn/U2F Security Keys</a></li>
+    <li><a href="https://rublon.com/product/sms-passcodes/">SMS Passcode</a></li>
+    <li><a href="https://rublon.com/product/email-link/">Email Link</a></li>
+</ul>
+<p><a id="configuration"></a></p>
+<h2 id="configuration">Configuration</h2>
+<p>Follow the steps below to configure Rublon Java SDK.</p>
+<h3 id="info-initial-assumptions">INFO: Initial Assumptions</h3>
+<p>Let’s assume there is a session handler class Session. It has access to an object that stores user data of the currently logged-in user. Also, let’s assume there is the HttpServer class which is a simple HTTP server instance.</p>
+<p>Classes <code>Session</code> and <code>HttpServer</code> will be used in Java code examples later in this document.</p>
+<h3 id="info-modifying-the-library">INFO: Modifying the Library</h3>
+<p>The <code>Rublon</code> class implements a few public methods, which, when needed, can be overridden with inheritance.</p>
+<p>We strongly discourage you from modifying any part of the library, as it usually leads to difficulties during library updates. If you need to change the flow or internal structure of the <code>Rublon</code> or <code>RublonCallback</code> classes, do not hesitate to subclass them according to your needs.</p>
+<h3 id="initialize-the-library">Initialize the Library</h3>
+<p>To initialize the Rublon JAVA SDK library, you need to instantiate a <code>Rublon</code> class object. Its constructor takes three arguments.</p>
+<table>
+    <caption><code>Rublon</code> class constructor arguments</caption>
+    <thead><tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Description</th>
+    </tr></thead>
+    <tbody>
+    <tr><td><code>systemToken</code></td><td>String</td><td>The System Token value you copied from the Rublon Admin Console.</td></tr>
+    <tr><td><code>secretKey</code></td><td>String</td><td>The Secret Key value you copied from the Rublon Admin Console.</td></tr>
+    <tr><td><code>apiServer</code></td><td>String</td><td>Optional.<br/><br/>Rublon API Server URI<br/><br/>Default:<br/><a href="https://core.rublon.net">https://core.rublon.net</a></td></tr>
+    </tbody>
+</table>
+
+<h3 id="example-java-code">Example Java Code</h3>
+<pre><code>
+    import com.rublon.sdk.twofactor.Rublon;
+
+    ...
+
+    Rublon rublon = new Rublon(
+        // system token:
+        "A69FC450848B4B94A040416DC4421523",
+        // secret key:
+        "bLS6NDP7pGjg346S4IHqTHgQQjjSLw3CyApvz5iRjYzgIPN4e9EOi1cQJLrTlvLoHY8zeqg4ILrItYidKJ6JjEUZaA6pR1tZMwSZ"
+    );
+</code></pre>
+<h3 id="verify-configuration">Verify Configuration</h3>
+<p>The <code>Rublon.init()</code> method verifies the validity of the configuration. Your application should call this method every time you change or save the configuration. A configuration change can be, for example, changing the systemToken or secretKey.</p>
+<table>
+    <caption><code>Rublon.init()</code> method arguments</caption>
+    <thead><tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Description</th>
+    </tr></thead>
+    <tbody>
+    <tr><td><code>appVer</code></td><td>String</td><td>The version of the current application.</td></tr>
+    <tr><td><code>params</code></td><td>JSONObject</td><td>Optional.<br/><br/>Additional transaction parameters.</td></tr>
+    </tbody>
+</table>
+
+<p><code>Rublon.init()</code> may throw one of the following exceptions:</p>
+<ul>
+    <li><strong>ApplicationNotFoundException</strong> - Invalid system token</li>
+    <li><strong>InvalidSignatureException</strong> - Invalid Secret Key</li>
+    <li><strong>UnsupportedVersionException</strong> - Incorrect version of the application</li>
+</ul>
+<h3 id="perform-authentication">Perform Authentication</h3>
+<p>The <code>Rublon.auth()</code> method uses the username to check the user&#39;s protection status and returns a URL address the user should be redirected to in their web browser. The method returns <code>null</code> if the user&#39;s protection is not active.</p>
+<table>
+    <caption><code>Rublon.auth()</code> method arguments</caption>
+    <thead><tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Description</th>
+    </tr></thead>
+    <tbody>
+    <tr><td><code>callbackUrl</code></td><td>String</td><td>The integrated system&#39;s callback URL.<br/><br/>Rublon will redirect the user to this URL after successful authentication</td></tr>
+    <tr><td><code>username</code></td><td>String</td><td>The user&#39;s unique ID, which allows the user to sign in.<br/><br/>Required.</td></tr>
+    <tr><td><code>userEmail</code></td><td>JSONObject</td><td>Optional.<br/><br/>The user&#39;s email address. You only need to provide the email address if you want to use the Email Link authentication method.</td></tr>
+    <tr><td><code>params</code></td><td>JSONObject</td><td>Optional.<br/><br/>Additional transaction parameters (optional)</td></tr>
+    </tbody>
+</table>
+
+<h3 id="example-java-code">Example Java Code</h3>
+<pre><code>
+    /**
+     * An example method used to log the user in (integrated system's method)
+     */
+    void login(String login, String password) {
+
+        if (loginPreListener()) {
+            User user = authenticate(login, password);
+            if (user != null) {
+                // The user has been authenticated.
+                Session.setUser(user);
+                loginPostListener();
+            }
+        }
+    }
+
+
+    /**
+     * Listener (hook) invoked after a successful first factor user authentication,
+     * implemented for Rublon integration purposes.
+     */
+     void loginPostListener() {
+
+        Rublon rublon = new Rublon(
+            // systemToken (please store in a config):
+            "A69FC450848B4B94A040416DC4421523",
+            // secretKey (please store in a safe config):
+            "bLS6NDP7pGjg346S4IHqTHgQQjjSLw3CyApvz5iRjYzgIPN4e9EOi1cQJLrTlvLoHY8zeqg4ILrItYidKJ6JjEUZaA6pR1tZMwSZ"
+        );
+
+        try { // Initiate a Rublon authentication transaction
+
+            String url = rublon.auth(
+                "http://example.com/rublon_callback", // callback URL
+                Session.getUser().getId(), // User Id
+                Session.getUser().getEmail() // User email
+            );
+
+            if (url != null) { // User protection is active
+
+                // Log the user out before checking the second factor:
+                Session.setUser(null);
+
+                // Redirect the user's web browser to Rublon servers
+                // to verify the protection:
+                HttpServer.sendHeader("Location", url);
+            }
+
+        } catch (RublonException e) {
+            // An error occurred
+            Session.setUser(null);
+            HttpServer.setStatus(500);
+            HttpServer.setResponse("There was an error, please try again later.");
+        }
+
+    /* If we're here, the user's account is not protected by Rublon.
+    The user can be authenticated. */
+
+    }
+</code></pre>
+<p><strong>Note</strong>: Make sure that your code checks that the user is not signed in. The user should be signed in only after successful Rublon authentication.</p>
+<h3 id="finalize-authentication">Finalize Authentication</h3>
+<p>After successful authentication, Rublon redirects the user to the callback URL. The callback flow continues and finalizes the authentication process.</p>
+<h4 id="input-params">Input Params</h4>
+<p>The callback URL will receive its input arguments in the URL address itself (<em>query string</em>).</p>
+<table>
+    <caption>Callback URL arguments</caption>
+    <thead><tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Description</th>
+    </tr></thead>
+    <tbody>
+    <tr><td><code>rublonState</code></td><td>String</td><td>Authentication result: <code>ok</code>, <code>error</code> or <code>cancel</code></td></tr>
+    <tr><td><code>rublonToken</code></td><td>String</td><td>Access token (60 alphanumeric characters, upper- and lowercase), which allows verifying the authentication using a background Rublon API connection</td></tr>
+    </tbody>
+</table>
+
+<p><strong>Note</strong>: If the callback URL has been set to, e.g., <code>http://example.com/twofactor/auth/</code>, the params will be appended to the URL address:
+    <code>http://example.com/twofactor/auth/?rublonState=ok&amp;rublonToken=Kmad4hAS...d</code></p>
+<p><strong>Note</strong>: If you want to construct the callback URL differently (e.g., by using URL Rewrite), you can set the callback URL&#39;s template using the meta-tags: <code>%rublonToken%</code> and <code>%rublonState%</code>, like so:
+    <code>http://example.com/twofactor/auth/%rublonState%/%rublonToken%</code></p>
+<h4 id="handle-authentication-result">Handle Authentication Result</h4>
+<p>After the callback is invoked, you need to create a <code>RublonCallback</code> subclass instance to properly finalize authentication. Since the <code>RublonCallback</code> class is abstract, you need to create a subclass that implements the methods you need. The implementation is up to you and depends on your requirements and unique system details.</p>
+<table>
+    <caption><code>RublonCallback</code> class constructor method arguments</caption>
+    <thead><tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Description</th>
+    </tr></thead>
+    <tbody>
+    <tr><td>rublon</td><td>Rublon</td><td>An instance of the Rublon class.</td></tr>
+    </tbody>
+</table>
+
+<p>Next, call the <code>RublonCallback.call()</code> method.</p>
+<p>You should implement the following abstract methods in a subclass.</p>
+<ul>
+    <li><code>String getState()</code> - returns the &quot;rublonState&quot; parameter from the HTTP GET request.</li>
+    <li><code>String getAccessToken()</code> - returns the &quot;rublonToken&quot; parameter from the HTTP GET request.</li>
+    <li><code>void handleCancel()</code> - called when the state parameter is not &quot;ok&quot; nor &quot;error&quot;.</li>
+    <li><code>void handleError()</code> - called when the state parameter value is &quot;error&quot;.</li>
+    <li><code>void userAuthenticated(String appUserId)</code> - handle the authenticated user with given user&#39;s local ID.</li>
+</ul>
+<h4 id="example-java-code">Example Java Code</h4>
+<p>An example implementation of the <code>RublonCallback</code> class and usage in the callback:</p>
+<pre><code>
+    class Callback extends >RublonCallback {
+
+        public String getState() {
+            return HttpServer.getRequestHandler().getParam(PARAMETER_STATE);
+        }
+
+        public String getAccessToken() {
+            return HttpServer.getRequestHandler().getParam(PARAMETER_ACCESS_TOKEN);
+        }
+
+        protected void handleCancel() {
+            HttpServer.sendHeader("Location", "/login");
+        }
+
+        protected void handleError() {
+            HttpServer.sendHeader("Location", "/login?msg=rublon-error");
+        }
+
+        protected void userAuthenticated(String appUserId) {
+            Session.setUser(User.getById(appUserId));
+            HttpServer.sendHeader("Location", "/dashboard");
+        }
+    }
+
+    ...
+
+    Rublon rublon = new Rublon(
+        "A69FC450848B4B94A040416DC4421523",
+        "bLS6NDP7pGjg346S4IHqTHgQQjjSLw3CyApvz5iRjYzgIPN4e9EOi1cQJLrTlvLoHY8zeqg4ILrItYidKJ6JjEUZaA6pR1tZMwSZ"
+    );
+
+    try {
+        RublonCallback callback = new Callback(rublon);
+        callback.call();
+    } catch (CallbackException e) {
+        class="hljs-comment">// Please handle this error in the better way:
+        HttpServer.setStatus(500);
+        HttpServer.setResponse("There was an error, please try again later. " + e.getMessage());
+    }
+</code></pre>
+<p><a id="troubleshooting"></a></p>
+<h2 id="troubleshooting">Troubleshooting</h2>
+<p>If you encounter any issues with your Rublon integration, please contact <a href="https://rublon.com/support/">Rublon Support</a>.</p>
