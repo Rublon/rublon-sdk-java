@@ -129,10 +129,10 @@ To initialize the Rublon JAVA SDK library, you need to instantiate a `Rublon` cl
 	);
 
 ### Verify Configuration
-The `Rublon.init()` method verifies the validity of the configuration. Your application should call this method every time you change or save the configuration. A configuration change can be, for example, changing the systemToken or secretKey.
+The `Rublon.checkApplication()` method verifies the validity of the configuration. Your application should call this method every time you change or save the configuration. A configuration change can be, for example, changing the systemToken or secretKey.
 
 <table>
-	<caption><code>Rublon.init()</code> method arguments</caption>
+	<caption><code>Rublon.checkApplication()</code> method arguments</caption>
 	<thead><tr>
 		<th>Name</th>
 		<th>Type</th>
@@ -144,7 +144,7 @@ The `Rublon.init()` method verifies the validity of the configuration. Your appl
 	</tbody>
 </table>
 
-`Rublon.init()` may throw one of the following exceptions:
+`Rublon.checkApplication()` may throw one of the following exceptions:
 - **ApplicationNotFoundException** - Invalid system token
 - **InvalidSignatureException** - Invalid Secret Key
 - **UnsupportedVersionException** - Incorrect version of the application

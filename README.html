@@ -427,9 +427,9 @@
     );
 </code></pre>
 <h3 id="verify-configuration">Verify Configuration</h3>
-<p>The <code>Rublon.init()</code> method verifies the validity of the configuration. Your application should call this method every time you change or save the configuration. A configuration change can be, for example, changing the systemToken or secretKey.</p>
+<p>The <code>Rublon.checkApplication()</code> method verifies the validity of the configuration. Your application should call this method every time you change or save the configuration. A configuration change can be, for example, changing the systemToken or secretKey.</p>
 <table>
-    <caption><code>Rublon.init()</code> method arguments</caption>
+    <caption><code>Rublon.checkApplication()</code> method arguments</caption>
     <thead><tr>
         <th>Name</th>
         <th>Type</th>
@@ -441,7 +441,7 @@
     </tbody>
 </table>
 
-<p><code>Rublon.init()</code> may throw one of the following exceptions:</p>
+<p><code>Rublon.checkApplication()</code> may throw one of the following exceptions:</p>
 <ul>
     <li><strong>ApplicationNotFoundException</strong> - Invalid system token</li>
     <li><strong>InvalidSignatureException</strong> - Invalid Secret Key</li>

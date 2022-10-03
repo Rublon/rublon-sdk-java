@@ -6,7 +6,7 @@ import com.rublon.sdk.core.RublonConsumer;
 import com.rublon.sdk.core.rest.RESTClient;
 import org.json.JSONObject;
 
-public class Init extends APIMethod {
+public class CheckApplication extends APIMethod {
 
 	/**
 	 * API request URI path.
@@ -29,7 +29,7 @@ public class Init extends APIMethod {
 	 * @param rublon
 	 * @param restClient
 	 */
-	public Init(RublonConsumer rublon, RESTClient restClient) {
+	public CheckApplication(RublonConsumer rublon, RESTClient restClient) {
 		this(rublon, restClient, null);
 	}
 
@@ -40,7 +40,7 @@ public class Init extends APIMethod {
 	 * @param restClient
 	 * @param appVer
 	 */
-	public Init(RublonConsumer rublon, RESTClient restClient, String appVer) {
+	public CheckApplication(RublonConsumer rublon, RESTClient restClient, String appVer) {
 		this(rublon, restClient, appVer, null);
 	}
 
@@ -52,7 +52,7 @@ public class Init extends APIMethod {
 	 * @param appVer
 	 * @param params
 	 */
-	public Init(RublonConsumer rublon, RESTClient restClient, String appVer, JSONObject params) {
+	public CheckApplication(RublonConsumer rublon, RESTClient restClient, String appVer, JSONObject params) {
 		super(rublon, restClient);
 		this.appVer = appVer;
 		this.params = params;

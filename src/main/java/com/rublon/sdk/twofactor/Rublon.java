@@ -9,7 +9,7 @@ import com.rublon.sdk.core.exception.RublonException;
 import com.rublon.sdk.core.rest.RESTClient;
 import com.rublon.sdk.twofactor.api.BeginTransaction;
 import com.rublon.sdk.twofactor.api.Credentials;
-import com.rublon.sdk.twofactor.api.Init;
+import com.rublon.sdk.twofactor.api.CheckApplication;
 import org.json.JSONObject;
 
 /**
@@ -67,15 +67,15 @@ public class Rublon extends RublonConsumer {
 	 * @throws APIException
 	 * @throws RublonException
 	 */
-	public void init(String appVer) throws APIException, RublonException {
+	public void checkApplication(String appVer) throws APIException, RublonException {
 
 		if (!isConfigured()) {
 			throw new RublonException("Missing system token and secret key.");
 		}
 
 		try {
-			Init init = new Init(this, restClient, appVer);
-			init.perform();
+			CheckApplication checkApplication = new CheckApplication(this, restClient, appVer);
+			checkApplication.perform();
 		} catch (RublonException e) {
 			throw e;
 		}
@@ -90,15 +90,15 @@ public class Rublon extends RublonConsumer {
 	 * @throws APIException
 	 * @throws RublonException
 	 */
-	public void init(String appVer, JSONObject params) throws APIException, RublonException {
+	public void checkApplication(String appVer, JSONObject params) throws APIException, RublonException {
 
 		if (!isConfigured()) {
 			throw new RublonException("Missing system token and secret key.");
 		}
 
 		try {
-			Init init = new Init(this, restClient, appVer, params);
-			init.perform();
+			CheckApplication checkApplication = new CheckApplication(this, restClient, appVer, params);
+			checkApplication.perform();
 		} catch (RublonException e) {
 			throw e;
 		}
