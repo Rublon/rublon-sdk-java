@@ -186,6 +186,7 @@ public class APIException extends RublonException {
 	static public Class factoryGetClass(String name) {
 		
 		HashMap<String,Class> map = new HashMap<String, Class>();
+		map.put("ApplicationNotFoundException", APIException.ApplicationNotFoundException.class);
 		map.put("MissingFieldException", APIException.MissingFieldException.class);
 		map.put("MissingHeaderException", APIException.MissingHeaderException.class);
 		map.put("EmptyInputIException", APIException.EmptyInputException.class);
@@ -215,7 +216,16 @@ public class APIException extends RublonException {
 	// ---------------------------------------------------------------------------------------------
 	// Nested exception classes
 	// ---------------------------------------------------------------------------------------------
-	
+
+	static public class ApplicationNotFoundException extends APIException {
+		public ApplicationNotFoundException(RESTClient client, String message) {
+			super(client, message);
+		}
+		public ApplicationNotFoundException(RESTClient client) {
+			this(client, null);
+		}
+	}
+
 	static public class EmptyInputException extends APIException {
 		public EmptyInputException(RESTClient client, String message) {
 			super(client, message);
